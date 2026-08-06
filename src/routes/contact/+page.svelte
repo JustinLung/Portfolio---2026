@@ -98,7 +98,7 @@
 
 <style>
 	.contact-page {
-		padding-block: 64px 128px;
+		padding-block: 128px;
 	}
 
 	.contact-page__header {
