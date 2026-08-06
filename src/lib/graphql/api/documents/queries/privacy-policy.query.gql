@@ -1,0 +1,5 @@
+query GetPrivacyPolicyPage {
+	page(id: "privacy-policy", idType: URI) {
+		...PrivacyPolicyFields
+	}
+}

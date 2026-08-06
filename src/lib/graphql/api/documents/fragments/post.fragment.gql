@@ -1,0 +1,41 @@
+fragment PostFields on Post {
+	id
+	title
+	slug
+	date
+	content
+	excerpt
+	categories {
+		nodes {
+			id
+			name
+			slug
+		}
+	}
+	featuredImage {
+		node {
+			sourceUrl
+			altText
+		}
+	}
+	postMeta {
+		relatedWorks {
+			edges {
+				node {
+					... on Work {
+						slug
+						title
+						date
+						featuredImage {
+							node {
+								sourceUrl
+								altText
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

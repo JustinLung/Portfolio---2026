@@ -1,0 +1,13 @@
+query works {
+	works(where: { orderby: { field: DATE, order: DESC }, status: PUBLISH }) {
+		nodes {
+			...WorkFields
+		}
+	}
+}
+
+query work($slug: ID!) {
+	work(id: $slug, idType: SLUG) {
+		...WorkFields
+	}
+}

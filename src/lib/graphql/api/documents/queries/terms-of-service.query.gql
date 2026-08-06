@@ -1,0 +1,5 @@
+query GetTermsOfServicePage {
+	page(id: "terms-of-service", idType: URI) {
+		...TermsOfServiceFields
+	}
+}

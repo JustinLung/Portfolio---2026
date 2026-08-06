@@ -1,0 +1,82 @@
+.button {
+	--button-color: var(--color-white);
+	--button-background: var(--color-primary);
+	--button-border: var(--color-primary);
+	--button-hover-color: var(--color-primary);
+	--button-hover-background: var(--color-white);
+	--button-hover-border: var(--color-primary);
+
+	color: var(--button-color);
+	background-color: var(--button-background);
+
+	white-space: nowrap;
+
+	border: 1px solid;
+	border-color: var(--button-border);
+	border-radius: 4px;
+
+	position: relative;
+	z-index: 1;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: fit-content;
+	padding-inline: 12px;
+	height: 32px;
+
+	font-size: 0.75rem;
+	font-weight: 500;
+
+	overflow: hidden;
+	cursor: pointer;
+
+	text-decoration: none;
+
+	transition:
+		color 250ms var(--easeOutExpo) 120ms,
+		border-color 250ms var(--easeOutExpo) 120ms,
+		transform 250ms var(--easeOutExpo) 120ms,
+		background-color 250ms var(--easeOutExpo) 120ms;
+
+	&:active {
+		transform: scale(0.95);
+	}
+
+	@hover {
+		color: var(--button-hover-color);
+		background-color: var(--button-hover-background);
+		border-color: var(--button-hover-border);
+	}
+}
+
+.button--secondary {
+	--button-color: var(--color-primary);
+	--button-background: var(--color-white);
+	--button-border: var(--color-primary);
+	--button-hover-color: var(--color-white);
+	--button-hover-background: var(--color-primary);
+	--button-hover-border: var(--color-primary);
+}
+
+.link {
+	text-decoration: none;
+	background-image: linear-gradient(currentColor, currentColor);
+	background-position: left bottom;
+	background-size: 0 1px;
+	background-repeat: no-repeat;
+	transition: background-size 300ms var(--easeOutExpo);
+
+	@hover {
+		background-size: 100% 1px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+
+	&.link--active {
+		background-size: 100% 1px;
+	}
+}

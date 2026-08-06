@@ -1,0 +1,27 @@
+fragment WorkFields on Work {
+	id
+	title
+	slug
+	date
+	content
+	workFields {
+		excerpt
+		githubUrl
+		siteUrl
+		at
+		role
+	}
+	categories {
+		nodes {
+			id
+			name
+			slug
+		}
+	}
+	featuredImage {
+		node {
+			sourceUrl
+			altText
+		}
+	}
+}

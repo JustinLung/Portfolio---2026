@@ -1,0 +1,72 @@
+html {
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-tap-highlight-color: transparent;
+	overscroll-behavior: none;
+}
+
+body {
+	background-color: var(--color-neutral-800);
+	color: var(--color-white);
+	overflow-x: clip;
+	font-feature-settings: 'lnum' 1;
+	position: relative;
+
+	&::after {
+		position: fixed; /* changed from absolute */
+		z-index: 2;
+		inset: -50%; /* or just inset: 0; if you don't need bleed */
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.55'/%3E%3C/svg%3E");
+		background-size: 180px 180px;
+		content: '';
+		filter: contrast(180%) brightness(180%);
+		opacity: 0.35;
+		mix-blend-mode: screen;
+		pointer-events: none;
+		animation: hero-noise 180ms steps(2, end) infinite;
+	}
+}
+
+.hibbem:not(:focus):not(:active),
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+}
+
+.container {
+	max-width: 1440px;
+	margin-inline: auto;
+	padding: 0 16px;
+}
+
+
+@keyframes hero-noise {
+	0% {
+		transform: translate3d(-2%, 1%, 0);
+	}
+	25% {
+		transform: translate3d(2%, -3%, 0);
+	}
+	50% {
+		transform: translate3d(-3%, 2%, 0);
+	}
+	75% {
+		transform: translate3d(3%, 3%, 0);
+	}
+	100% {
+		transform: translate3d(1%, -2%, 0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	body::after {
+		animation: none;
+	}
+}

@@ -1,0 +1,14 @@
+fragment TermsOfServiceFields on Page {
+	id
+	title
+	content
+	uri
+	featuredImage {
+		node {
+			id
+			uri
+			sourceUrl
+			altText
+		}
+	}
+}

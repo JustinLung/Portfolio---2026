@@ -1,0 +1,12 @@
+/* Color tokens */
+:root {
+	--color-primary: #2f2a24;
+	--color-secondary: #3b352e;
+	--color-tertiary: #241f1a;
+	--color-quaternary: #8c8177;
+	--color-neutral-800: #181411;
+	--color-neutral-900: #14100c;
+	--color-neutral-950: #0b0806;
+	--color-white: #ffffff;
+	--color-black: #000000;
+}

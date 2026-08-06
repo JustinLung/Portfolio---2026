@@ -1,0 +1,13 @@
+query posts {
+	posts(first: 24, where: { orderby: { field: DATE, order: DESC }, status: PUBLISH }) {
+		nodes {
+			...PostFields
+		}
+	}
+}
+
+query post($slug: ID!) {
+	post(id: $slug, idType: SLUG) {
+		...PostFields
+	}
+}

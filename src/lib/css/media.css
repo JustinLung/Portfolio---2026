@@ -1,0 +1,14 @@
+@custom-media --viewport-sm-up (min-width: 30em);
+@custom-media --viewport-md-up (min-width: 48em);
+@custom-media --viewport-lg-up (min-width: 62em);
+@custom-media --viewport-xl-up (min-width: 78.375em);
+@custom-media --viewport-2xl-up (min-width: 96em);
+
+@custom-media --viewport-sm-down (max-width: 30em);
+@custom-media --viewport-md-down (max-width: 48em);
+@custom-media --viewport-lg-down (max-width: 62em);
+@custom-media --viewport-xl-down (max-width: 78.375em);
+@custom-media --viewport-2xl-down (max-width: 96em);
+
+@custom-media --motion-reduce (prefers-reduced-motion: reduce);
+@custom-media --motion-allow (prefers-reduced-motion: no-preference);

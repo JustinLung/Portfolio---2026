@@ -1,0 +1,7 @@
+query GetExperiences {
+	experiences(first: 50, where: { orderby: { field: DATE, order: DESC } }) {
+		nodes {
+			...ExperienceFields
+		}
+	}
+}
