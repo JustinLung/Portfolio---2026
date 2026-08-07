@@ -73,7 +73,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding-block: 16px;
+		padding-block: 32px;
 
 		.header__logo {
 			color: var(--color-white) !important;

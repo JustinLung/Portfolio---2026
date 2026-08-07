@@ -71,6 +71,23 @@
 
 		.footer__eyebrow {
 			margin-bottom: 12px;
+			background-color: var(--color-dark-green);
+			padding: 4px 8px;
+			border-radius: 16px;
+			font-weight: 500;
+			color: var(--color-white);
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+
+			&::before {
+				content: '';
+				width: 8px;
+				height: 8px;
+				background-color: var(--color-light-green);
+				display: inline-block;
+				border-radius: 50%;
+			}
 		}
 
 		.footer__navigation {
