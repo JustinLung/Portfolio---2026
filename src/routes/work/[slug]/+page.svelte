@@ -143,8 +143,8 @@
 
 		.work-detail__content {
 			display: grid;
-			gap: 8px;
-			font-size: 0.875rem;
+			gap: 16px;
+			font-size: 1rem;
 
 			:global(p) {
 				max-width: 38rem;
