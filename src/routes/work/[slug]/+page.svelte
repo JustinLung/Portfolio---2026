@@ -97,7 +97,7 @@
 
 <style>
 	.work-detail {
-		margin-block: 64px 128px;
+		margin-block: 128px;
 		justify-content: space-between;
 		gap: 64px;
 
@@ -143,7 +143,7 @@
 
 		.work-detail__content {
 			display: grid;
-			gap: 32px;
+			gap: 8px;
 			font-size: 0.875rem;
 
 			:global(p) {
