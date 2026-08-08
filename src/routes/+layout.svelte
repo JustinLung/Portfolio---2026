@@ -14,6 +14,7 @@
 	import SiteLoader from '$lib/components/shared/SiteLoader.svelte';
 	import { initializeSfx, unlockSfx } from '$lib/sfx';
 	import { onMount } from 'svelte';
+	import SkipMainContent from '$lib/components/shared/SkipMainContent.svelte';
 
 	let { children } = $props();
 
@@ -45,7 +46,8 @@
 <Lenis />
 <PageTransition />
 <Header />
-<main class="container">
+<SkipMainContent />
+<main id="main" class="container" tabindex="-1">
 	{@render children()}
 </main>
 <Footer />
