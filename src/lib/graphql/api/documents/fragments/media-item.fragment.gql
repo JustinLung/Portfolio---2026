@@ -1,0 +1,7 @@
+fragment MediaItemFields on MediaItem {
+	id
+	uri
+	link
+	sourceUrl
+	altText
+}

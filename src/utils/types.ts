@@ -62,8 +62,10 @@ export type CardStackProps = {
 
 export type PersonalIntroProps = {
 	title: string;
+	subtitle: string;
 	description: string;
 	image: string;
+	imageAlt: string;
 };
 
 export type SeoProps = {
@@ -72,4 +74,22 @@ export type SeoProps = {
 	keywords?: string;
 	author?: string;
 	robots?: string;
+};
+
+export type HomePage = {
+	hero: {
+		title: string;
+		subtitle: string;
+	};
+	latestWork: {
+		title: string;
+		subtitle: string;
+	};
+	personal: {
+		title: string;
+		subtitle: string;
+		text: string;
+		image: string;
+		imageAlt: string;
+	};
 };

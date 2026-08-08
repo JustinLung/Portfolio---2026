@@ -8,7 +8,7 @@
 
 	import type { PersonalIntroProps } from '../../../utils/types';
 
-	let { title, description, image }: PersonalIntroProps = $props();
+	let { title, subtitle, description, image, imageAlt }: PersonalIntroProps = $props();
 	let sectionRef: HTMLElement;
 
 	onMount(() => {
@@ -57,7 +57,7 @@
 
 <section class="personal-intro" bind:this={sectionRef}>
 	<div class="personal-intro__content">
-		<span class="personal-intro__eyebrow font-small">In short</span>
+		<span class="personal-intro__eyebrow font-small">{subtitle}</span>
 		<h2 class="personal-intro__title">{title}</h2>
 		<p class="personal-intro__description">{description}</p>
 		<a
@@ -67,11 +67,11 @@
 			data-uisfx="forward"
 		>
 			Read more →
-			<span class="visually-hidden">About me</span>
+			<span class="visually-hidden">{title}</span>
 		</a>
 	</div>
 	<figure class="personal-intro__image">
-		<img src={image} alt={title} loading="lazy" />
+		<img src={image} alt={imageAlt} loading="lazy" />
 	</figure>
 </section>
 

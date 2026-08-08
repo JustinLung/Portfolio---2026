@@ -8,7 +8,15 @@
 
 	gsap.registerPlugin(ScrollTrigger);
 
-	let { items }: { items: WorkItem[] } = $props();
+	let {
+		items,
+		title,
+		subtitle
+	}: {
+		items: WorkItem[];
+		title: string;
+		subtitle: string;
+	} = $props();
 	let sectionRef: HTMLElement;
 
 	const cardAspectRatios = ['16 / 10', '4 / 3', '5 / 4', '16 / 9', '4 / 3', '16 / 10'] as const;
@@ -63,8 +71,8 @@
 
 <section class="latest-work" bind:this={sectionRef}>
 	<div class="latest-work__intro">
-		<p class="latest-work__subtitle font-small">Client work</p>
-		<h2 class="latest-work__title">A selection of my latest work</h2>
+		<p class="latest-work__subtitle font-small">{subtitle}</p>
+		<h2 class="latest-work__title">{title}</h2>
 	</div>
 	{#if items.length > 0}
 		<ul class="latest-work__list">

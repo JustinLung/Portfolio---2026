@@ -1,0 +1,18 @@
+fragment HomePageFields on Page {
+	id
+	uri
+	homeFields {
+		heroSubtitle
+		heroTitle
+		latestWorkSubtitle
+		latestWorkTitle
+		personalImage {
+			node {
+				...MediaItemFields
+			}
+		}
+		personalTextTitle
+		personalTextSubtitle
+		personalText
+	}
+}

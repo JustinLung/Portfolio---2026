@@ -3,6 +3,8 @@
 	import { onMount } from 'svelte';
 	import HeroRoseScene from './HeroRoseScene.svelte';
 
+	let { title, subtitle }: { title: string; subtitle: string } = $props();
+
 	let pointerX = $state(0);
 	let pointerY = $state(0);
 	let pointerActive = $state(false);
@@ -45,8 +47,8 @@
 		</Canvas>
 	</div>
 	<div class="hero__content">
-		<span class="hero__subtitle">Creative Frontend Developer</span>
-		<h1 class="hero__title">Justin Lung</h1>
+		<span class="hero__subtitle">{subtitle}</span>
+		<h1 class="hero__title">{title}</h1>
 	</div>
 </section>
 

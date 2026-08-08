@@ -21,8 +21,7 @@ fragment WorkFields on Work {
 	}
 	featuredImage {
 		node {
-			sourceUrl
-			altText
+			...MediaItemFields
 		}
 	}
 }
