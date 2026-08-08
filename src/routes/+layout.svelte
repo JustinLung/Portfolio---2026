@@ -5,7 +5,7 @@
 	import '../lib/css/typography.css';
 	import '../lib/css/variables.css';
 	import '../lib/css/button.css';
-
+	import '../utils/easter-egg';
 	import favicon from '$lib/assets/favicon.ico';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
