@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte';
-	import { gsap } from 'gsap';
+	import gsap from 'gsap';
 	import { Flip } from 'gsap/Flip';
 	import WorkListCard from './WorkListCard.svelte';
 	import WorkListRow from './WorkListRow.svelte';

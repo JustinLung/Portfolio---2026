@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import previewPlaceholder from '$lib/assets/work-preview-placeholder.svg';
-	import { gsap } from 'gsap';
+	import gsap from 'gsap';
 	import type { WorkItem } from '../../../utils/types';
 
 	let { item }: { item: WorkItem } = $props();

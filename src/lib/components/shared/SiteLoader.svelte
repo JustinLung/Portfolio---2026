@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { gsap } from 'gsap';
+	import gsap from 'gsap';
 	import { onMount, tick } from 'svelte';
 
 	let progress = $state(0);

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
+	import gsap from 'gsap';
 
 	let curtain: HTMLDivElement;
 

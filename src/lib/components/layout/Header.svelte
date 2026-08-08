@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import { gsap } from 'gsap';
+	import gsap from 'gsap';
 	import { links } from '../../../utils/links';
 	import { onDestroy } from 'svelte';
 
