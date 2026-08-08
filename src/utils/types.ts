@@ -65,3 +65,11 @@ export type PersonalIntroProps = {
 	description: string;
 	image: string;
 };
+
+export type SeoProps = {
+	title: string;
+	description?: string;
+	keywords?: string;
+	author?: string;
+	robots?: string;
+};

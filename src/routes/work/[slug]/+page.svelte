@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import Seo from '$lib/components/shared/Seo.svelte';
 	import { onMount } from 'svelte';
 	import { observeHeaderHeight } from '../../../utils/header-height';
 	import type { PageProps } from './$types';
@@ -10,10 +11,7 @@
 	onMount(() => observeHeaderHeight((height) => (headerHeight = height)));
 </script>
 
-<svelte:head>
-	<title>Portfolio - {data.work.title} - Work</title>
-	<meta name="description" content={data.work.excerpt ?? data.work.title} />
-</svelte:head>
+<Seo title={data.work.title} description={data.work.excerpt ?? data.work.title} />
 
 <article
 	class="work-detail"

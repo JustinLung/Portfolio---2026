@@ -2,16 +2,13 @@
 	import CardStack from '$lib/components/shared/CardStack.svelte';
 	import About from '$lib/components/shared/About.svelte';
 	import Experiences from '$lib/components/shared/Experiences.svelte';
+	import Seo from '$lib/components/shared/Seo.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
-
-	console.log(data)
 </script>
 
-<svelte:head>
-	<title>Portfolio | {data.page.title}</title>
-</svelte:head>
+<Seo title={data.page.title} description={data.page.content} />
 
 <About
 	title={data.page.title}

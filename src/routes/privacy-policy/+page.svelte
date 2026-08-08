@@ -1,12 +1,14 @@
 <script lang="ts">
+	import Seo from '$lib/components/shared/Seo.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 </script>
 
-<svelte:head>
-	<title>Portfolio | {data.page.title ?? 'Privacy Policy'}</title>
-</svelte:head>
+<Seo
+	title={data.page.title ?? 'Privacy Policy'}
+	description={data.page.content ?? undefined}
+/>
 
 <article class="privacy-policy">
 	<h1>{data.page.title}</h1>

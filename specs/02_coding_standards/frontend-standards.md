@@ -77,6 +77,9 @@ Viewport suffixes are `sm`, `md`, `lg`, `xl`, and `2xl`. Use `-up` for minimum-w
 `-down` for maximum-width queries. Use `--motion-reduce` and `--motion-allow` for motion
 preferences.
 
+## Audio usage
+- for every interaction like hover, click add a sound effect with the uisfx package.
+
 ## Design principles
 
 - Establish hierarchy with scale, spacing, contrast, and alignment before adding decoration.

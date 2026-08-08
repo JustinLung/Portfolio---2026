@@ -1,14 +1,15 @@
 <script lang="ts">
+	import Seo from '$lib/components/shared/Seo.svelte';
 	import WorkList from '$lib/components/shared/WorkList.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 </script>
 
-<svelte:head>
-	<title>Portfolio - Work</title>
-	<meta name="description" content="Work" />
-</svelte:head>
+<Seo
+	title="Work"
+	description="Selected client and personal work — websites, motion-led experiences and custom themes."
+/>
 
 <section class="work-page">
 	<header class="work-page__header">

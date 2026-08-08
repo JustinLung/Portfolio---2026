@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Seo from '$lib/components/shared/Seo.svelte';
 	import { socialLinks } from '../../utils/links';
 	import { playSfx } from '$lib/sfx';
 
@@ -26,13 +27,10 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Portfolio - Contact</title>
-	<meta
-		name="description"
-		content="Get in touch to discuss a new website, creative development project or collaboration."
-	/>
-</svelte:head>
+<Seo
+	title="Contact"
+	description="Get in touch to discuss a new website, creative development project or collaboration."
+/>
 
 <section class="contact-page">
 	<header class="contact-page__header">
