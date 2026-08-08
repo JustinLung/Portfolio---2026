@@ -18,5 +18,11 @@ export default defineConfig({
 			// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 			adapter: adapter()
 		})
-	]
+	],
+
+	ssr: {
+		// gsap ships ESM syntax in .js files without "type": "module", so Node
+		// parses it as CommonJS and crashes. Bundling it avoids the ambiguity.
+		noExternal: ['gsap']
+	}
 });
