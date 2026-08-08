@@ -1,15 +1,13 @@
 <script lang="ts">
 	import RelatedPostsCarousel from '$lib/components/shared/RelatedPostsCarousel.svelte';
+	import Seo from '$lib/components/shared/Seo.svelte';
 	import WriteHero from '$lib/components/shared/WriteHero.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 </script>
 
-<svelte:head>
-	<title>Portfolio - {data.post.title} - Writing</title>
-	<meta name="description" content={data.post.title} />
-</svelte:head>
+<Seo title={data.post.title} description={data.post.excerpt ?? data.post.title} />
 
 <article class="post" aria-labelledby="post-title">
 	<WriteHero

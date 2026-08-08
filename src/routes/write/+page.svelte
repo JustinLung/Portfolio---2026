@@ -1,14 +1,12 @@
 <script lang="ts">
 	import BlogCard from '$lib/components/shared/BlogCard.svelte';
+	import Seo from '$lib/components/shared/Seo.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 </script>
 
-<svelte:head>
-	<title>Portfolio - Writing</title>
-	<meta name="description" content="Notes, ideas and articles." />
-</svelte:head>
+<Seo title="Writing" description="Notes, ideas and articles." />
 
 <section class="write-page">
 	<header class="write-page__header">

@@ -66,7 +66,8 @@
 			data-uisfx-hover="hover"
 			data-uisfx="forward"
 		>
-			Read more
+			Read more →
+			<span class="visually-hidden">About me</span>
 		</a>
 	</div>
 	<figure class="personal-intro__image">

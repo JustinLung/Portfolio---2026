@@ -6,7 +6,7 @@
 	import '../lib/css/variables.css';
 	import '../lib/css/button.css';
 
-	import favicon from '$lib/assets/favicon.svg';
+	import favicon from '$lib/assets/favicon.ico';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Lenis from '$lib/components/shared/Lenis.svelte';
