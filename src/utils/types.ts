@@ -9,7 +9,7 @@ export type WorkItem = {
 		name: string;
 		slug: string;
 	}[];
-	year: number;
+	year?: number;
 	date?: string;
 	content?: string;
 	excerpt?: string;

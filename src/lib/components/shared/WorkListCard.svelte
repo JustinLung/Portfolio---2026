@@ -29,7 +29,9 @@
 		</figure>
 		<span class="work-list-item__title">{item.title}</span>
 		<span class="work-list-item__category">{item.category}</span>
-		<span class="work-list-item__year">{item.year}</span>
+		{#if item.year}
+			<span class="work-list-item__year">{item.year}</span>
+		{/if}
 	</a>
 </li>
 

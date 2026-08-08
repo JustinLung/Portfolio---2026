@@ -11122,6 +11122,8 @@ export type WorkFields = AcfFieldGroup &
 		role?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 		/** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group */
 		siteUrl?: Maybe<Scalars['String']['output']>;
+		/** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group */
+		year?: Maybe<Scalars['Float']['output']>;
 	};
 
 /** Interface representing fields of the ACF &quot;WorkFields&quot; Field Group */
@@ -11141,6 +11143,8 @@ export type WorkFields_Fields = {
 	role?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 	/** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group */
 	siteUrl?: Maybe<Scalars['String']['output']>;
+	/** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group */
+	year?: Maybe<Scalars['Float']['output']>;
 };
 
 /** Identifier types for retrieving a specific Work. Specifies which unique attribute is used to find an exact Work. */
@@ -11464,6 +11468,7 @@ export type WorkFieldsFragment = {
 		siteUrl: string | null;
 		at: Array<string | null> | null;
 		role: Array<string | null> | null;
+		year: number | null;
 	} | null;
 	categories: { nodes: Array<{ id: string; name: string | null; slug: string | null }> } | null;
 	featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
@@ -11621,6 +11626,7 @@ export type WorksQuery = {
 				siteUrl: string | null;
 				at: Array<string | null> | null;
 				role: Array<string | null> | null;
+				year: number | null;
 			} | null;
 			categories: { nodes: Array<{ id: string; name: string | null; slug: string | null }> } | null;
 			featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
@@ -11645,6 +11651,7 @@ export type WorkQuery = {
 			siteUrl: string | null;
 			at: Array<string | null> | null;
 			role: Array<string | null> | null;
+			year: number | null;
 		} | null;
 		categories: { nodes: Array<{ id: string; name: string | null; slug: string | null }> } | null;
 		featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
@@ -11932,7 +11939,8 @@ export const WorkFieldsFragmentDoc = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'githubUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'siteUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'at' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'role' } }
+								{ kind: 'Field', name: { kind: 'Name', value: 'role' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'year' } }
 							]
 						}
 					},
@@ -12778,7 +12786,8 @@ export const WorksDocument = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'githubUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'siteUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'at' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'role' } }
+								{ kind: 'Field', name: { kind: 'Name', value: 'role' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'year' } }
 							]
 						}
 					},
@@ -12893,7 +12902,8 @@ export const WorkDocument = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'githubUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'siteUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'at' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'role' } }
+								{ kind: 'Field', name: { kind: 'Name', value: 'role' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'year' } }
 							]
 						}
 					},

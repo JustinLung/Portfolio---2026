@@ -1,7 +1,7 @@
 import { env } from '$env/dynamic/private';
 import { WorksDocument } from '$lib/graphql/generated/graphql';
 import { createApolloClient } from '$lib/server/apollo';
-import { toWorkItem } from '$lib/server/work';
+import { sortWorksByYearDesc, toWorkItem } from '$lib/server/work';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -25,7 +25,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		}
 
 		return {
-			works: data.works.nodes.map(toWorkItem)
+			works: sortWorksByYearDesc(data.works.nodes.map(toWorkItem))
 		};
 	} catch (cause) {
 		console.error('Failed to fetch works from WordPress', cause);

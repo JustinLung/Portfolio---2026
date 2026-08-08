@@ -10,6 +10,7 @@ fragment WorkFields on Work {
 		siteUrl
 		at
 		role
+		year
 	}
 	categories {
 		nodes {
