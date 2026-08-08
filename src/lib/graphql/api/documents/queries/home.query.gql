@@ -1,0 +1,5 @@
+query GetHomePage {
+	page(id: "/home/", idType: URI) {
+		...HomePageFields
+	}
+}

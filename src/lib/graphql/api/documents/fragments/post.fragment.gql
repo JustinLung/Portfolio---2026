@@ -14,8 +14,7 @@ fragment PostFields on Post {
 	}
 	featuredImage {
 		node {
-			sourceUrl
-			altText
+			...MediaItemFields
 		}
 	}
 	postMeta {
@@ -28,8 +27,7 @@ fragment PostFields on Post {
 						date
 						featuredImage {
 							node {
-								sourceUrl
-								altText
+								...MediaItemFields
 							}
 						}
 					}
@@ -38,4 +36,3 @@ fragment PostFields on Post {
 		}
 	}
 }
-

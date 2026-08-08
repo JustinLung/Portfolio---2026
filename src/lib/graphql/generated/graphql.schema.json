@@ -334,6 +334,62 @@
 			},
 			{
 				"kind": "OBJECT",
+				"name": "AcfMediaItemConnectionEdge",
+				"description": "Connection between the HomeFields_Fields type and the MediaItem type",
+				"isOneOf": null,
+				"fields": [
+					{
+						"name": "cursor",
+						"description": "Opaque reference to the nodes position in the connection. Value can be used with pagination args.",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "node",
+						"description": "The node of the connection, without the edges",
+						"args": [],
+						"type": {
+							"kind": "NON_NULL",
+							"name": null,
+							"ofType": {
+								"name": "MediaItem",
+								"kind": "OBJECT",
+								"ofType": null
+							}
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					}
+				],
+				"inputFields": null,
+				"interfaces": [
+					{
+						"kind": "INTERFACE",
+						"name": "Edge",
+						"ofType": null
+					},
+					{
+						"kind": "INTERFACE",
+						"name": "MediaItemConnectionEdge",
+						"ofType": null
+					},
+					{
+						"kind": "INTERFACE",
+						"name": "OneToOneConnection",
+						"ofType": null
+					}
+				],
+				"enumValues": null,
+				"possibleTypes": null
+			},
+			{
+				"kind": "OBJECT",
 				"name": "Avatar",
 				"description": "Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from.",
 				"isOneOf": null,
@@ -13841,6 +13897,11 @@
 					},
 					{
 						"kind": "OBJECT",
+						"name": "AcfMediaItemConnectionEdge",
+						"ofType": null
+					},
+					{
+						"kind": "OBJECT",
 						"name": "CategoryToAncestorsCategoryConnectionEdge",
 						"ofType": null
 					},
@@ -19540,6 +19601,102 @@
 						},
 						"isDeprecated": true,
 						"deprecationReason": "Use __typename instead"
+					},
+					{
+						"name": "heroSubtitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "heroTitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "latestWorkSubtitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "latestWorkTitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "personalImage",
+						"description": "Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "OBJECT",
+							"name": "AcfMediaItemConnectionEdge",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "personalText",
+						"description": "Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "personalTextSubtitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "personalTextTitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
 					}
 				],
 				"inputFields": null,
@@ -19580,6 +19737,102 @@
 						},
 						"isDeprecated": true,
 						"deprecationReason": "Use __typename instead"
+					},
+					{
+						"name": "heroSubtitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "heroTitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "latestWorkSubtitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "latestWorkTitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "personalImage",
+						"description": "Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "OBJECT",
+							"name": "AcfMediaItemConnectionEdge",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "personalText",
+						"description": "Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "personalTextSubtitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "personalTextTitle",
+						"description": "Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
 					}
 				],
 				"inputFields": null,
@@ -21066,6 +21319,11 @@
 				],
 				"enumValues": null,
 				"possibleTypes": [
+					{
+						"kind": "OBJECT",
+						"name": "AcfMediaItemConnectionEdge",
+						"ofType": null
+					},
 					{
 						"kind": "OBJECT",
 						"name": "GeneralSettingsToMediaItemConnectionEdge",
@@ -25993,6 +26251,11 @@
 				"possibleTypes": [
 					{
 						"kind": "OBJECT",
+						"name": "AcfMediaItemConnectionEdge",
+						"ofType": null
+					},
+					{
+						"kind": "OBJECT",
 						"name": "CategoryToParentCategoryConnectionEdge",
 						"ofType": null
 					},
@@ -26750,6 +27013,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "homeFields",
+						"description": "Fields of the HomeFields ACF Field Group",
+						"args": [],
+						"type": {
+							"kind": "OBJECT",
+							"name": "HomeFields",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "id",
 						"description": "The globally unique identifier of the page object.",
 						"args": [],
@@ -27296,6 +27571,11 @@
 					{
 						"kind": "INTERFACE",
 						"name": "UniformResourceIdentifiable",
+						"ofType": null
+					},
+					{
+						"kind": "INTERFACE",
+						"name": "WithAcfHomeFields",
 						"ofType": null
 					}
 				],
@@ -30345,18 +30625,6 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "homeFields",
-						"description": "Fields of the HomeFields ACF Field Group",
-						"args": [],
-						"type": {
-							"kind": "OBJECT",
-							"name": "HomeFields",
-							"ofType": null
-						},
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
 						"name": "id",
 						"description": "The globally unique identifier of the post object.",
 						"args": [],
@@ -31142,11 +31410,6 @@
 					{
 						"kind": "INTERFACE",
 						"name": "WithAcfBlogPostFields",
-						"ofType": null
-					},
-					{
-						"kind": "INTERFACE",
-						"name": "WithAcfHomeFields",
 						"ofType": null
 					},
 					{
@@ -65616,7 +65879,7 @@
 				"possibleTypes": [
 					{
 						"kind": "OBJECT",
-						"name": "Post",
+						"name": "Page",
 						"ofType": null
 					}
 				]
@@ -67046,6 +67309,18 @@
 						},
 						"isDeprecated": false,
 						"deprecationReason": null
+					},
+					{
+						"name": "year",
+						"description": "Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "Float",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
 					}
 				],
 				"inputFields": null,
@@ -67150,6 +67425,18 @@
 						"type": {
 							"kind": "SCALAR",
 							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "year",
+						"description": "Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "Float",
 							"ofType": null
 						},
 						"isDeprecated": false,

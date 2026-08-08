@@ -6,7 +6,6 @@ export function toWorkItem(work: WorkFieldsFragment): WorkItem {
 		throw new Error(`Work "${work.id}" is missing a slug, title, or date`);
 	}
 
-	const year = Number.parseInt(work.date.slice(0, 4), 10);
 	const categories = (work.categories?.nodes ?? []).flatMap(({ id, name, slug }) =>
 		name && slug ? [{ id, name, slug }] : []
 	);
@@ -21,7 +20,7 @@ export function toWorkItem(work: WorkFieldsFragment): WorkItem {
 		title: work.title,
 		category: categoryNames.join(', ') || 'Work',
 		categories,
-		year: Number.isNaN(year) ? 0 : year,
+		year: work.workFields?.year != null ? Math.trunc(work.workFields.year) : undefined,
 		date: work.date,
 		content: work.content ?? undefined,
 		excerpt: work.workFields?.excerpt ?? undefined,
@@ -32,4 +31,8 @@ export function toWorkItem(work: WorkFieldsFragment): WorkItem {
 		image: work.featuredImage?.node.sourceUrl ?? undefined,
 		imageAlt: work.featuredImage?.node.altText || work.title
 	};
+}
+
+export function sortWorksByYearDesc(works: WorkItem[]): WorkItem[] {
+	return [...works].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
 }

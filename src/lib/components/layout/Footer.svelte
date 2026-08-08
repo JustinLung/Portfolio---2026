@@ -4,12 +4,23 @@
 	import SoundToggle from '../shared/SoundToggle.svelte';
 
 	const year = new Date().getFullYear();
+
+	/** Toggle this to flip the availability badge between green and red. */
+	const availableForProjects = false;
 </script>
 
 <footer class="footer">
 	<div class="footer__inner container">
 		<div class="footer__cta">
-			<span class="footer__eyebrow font-small">Available for select projects</span>
+			<span
+				class="footer__eyebrow font-small"
+				class:footer__eyebrow--available={availableForProjects}
+				class:footer__eyebrow--unavailable={!availableForProjects}
+			>
+				{availableForProjects
+					? 'Available for select projects'
+					: 'Currently unavailable for projects'}
+			</span>
 			<p class="font-heading-4 font__heading font-heading">
 				Have a project in mind?<br />I promise only 3% of my time is spent Googling.
 			</p>
@@ -87,7 +98,6 @@
 
 		.footer__eyebrow {
 			margin-bottom: 12px;
-			background-color: var(--color-dark-green);
 			padding: 4px 8px;
 			border-radius: 16px;
 			font-weight: 500;
@@ -100,9 +110,24 @@
 				content: '';
 				width: 8px;
 				height: 8px;
-				background-color: var(--color-light-green);
 				display: inline-block;
 				border-radius: 50%;
+			}
+
+			&.footer__eyebrow--available {
+				background-color: var(--color-dark-green);
+
+				&::before {
+					background-color: var(--color-light-green);
+				}
+			}
+
+			&.footer__eyebrow--unavailable {
+				background-color: var(--color-dark-red);
+
+				&::before {
+					background-color: var(--color-light-red);
+				}
 			}
 		}
 

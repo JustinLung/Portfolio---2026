@@ -70,6 +70,17 @@ export type AcfFieldGroupFields = {
 	fieldGroupName?: Maybe<Scalars['String']['output']>;
 };
 
+/** Connection between the HomeFields_Fields type and the MediaItem type */
+export type AcfMediaItemConnectionEdge = Edge &
+	MediaItemConnectionEdge &
+	OneToOneConnection & {
+		__typename?: 'AcfMediaItemConnectionEdge';
+		/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+		cursor?: Maybe<Scalars['String']['output']>;
+		/** The node of the connection, without the edges */
+		node: MediaItem;
+	};
+
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export type Avatar = {
 	__typename?: 'Avatar';
@@ -3173,6 +3184,22 @@ export type HomeFields = AcfFieldGroup &
 		 * @deprecated Use __typename instead
 		 */
 		fieldGroupName?: Maybe<Scalars['String']['output']>;
+		/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+		heroSubtitle?: Maybe<Scalars['String']['output']>;
+		/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+		heroTitle?: Maybe<Scalars['String']['output']>;
+		/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+		latestWorkSubtitle?: Maybe<Scalars['String']['output']>;
+		/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+		latestWorkTitle?: Maybe<Scalars['String']['output']>;
+		/** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+		personalImage?: Maybe<AcfMediaItemConnectionEdge>;
+		/** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+		personalText?: Maybe<Scalars['String']['output']>;
+		/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+		personalTextSubtitle?: Maybe<Scalars['String']['output']>;
+		/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+		personalTextTitle?: Maybe<Scalars['String']['output']>;
 	};
 
 /** Interface representing fields of the ACF &quot;HomeFields&quot; Field Group */
@@ -3182,6 +3209,22 @@ export type HomeFields_Fields = {
 	 * @deprecated Use __typename instead
 	 */
 	fieldGroupName?: Maybe<Scalars['String']['output']>;
+	/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+	heroSubtitle?: Maybe<Scalars['String']['output']>;
+	/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+	heroTitle?: Maybe<Scalars['String']['output']>;
+	/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+	latestWorkSubtitle?: Maybe<Scalars['String']['output']>;
+	/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+	latestWorkTitle?: Maybe<Scalars['String']['output']>;
+	/** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+	personalImage?: Maybe<AcfMediaItemConnectionEdge>;
+	/** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+	personalText?: Maybe<Scalars['String']['output']>;
+	/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+	personalTextSubtitle?: Maybe<Scalars['String']['output']>;
+	/** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomeFields&quot; Field Group */
+	personalTextTitle?: Maybe<Scalars['String']['output']>;
 };
 
 /** File details for a Media Item */
@@ -4357,7 +4400,8 @@ export type Page = ContentNode &
 	NodeWithTemplate &
 	NodeWithTitle &
 	Previewable &
-	UniformResourceIdentifiable & {
+	UniformResourceIdentifiable &
+	WithAcfHomeFields & {
 		__typename?: 'Page';
 		/** Images selected for the About page. */
 		aboutImages?: Maybe<Array<Maybe<MediaItem>>>;
@@ -4409,6 +4453,8 @@ export type Page = ContentNode &
 		guid?: Maybe<Scalars['String']['output']>;
 		/** Whether the page object is password protected. */
 		hasPassword?: Maybe<Scalars['Boolean']['output']>;
+		/** Fields of the HomeFields ACF Field Group */
+		homeFields?: Maybe<HomeFields>;
 		/** The globally unique identifier of the page object. */
 		id: Scalars['ID']['output'];
 		/** Whether the node is a Comment */
@@ -4886,7 +4932,6 @@ export type Post = ContentNode &
 	Previewable &
 	UniformResourceIdentifiable &
 	WithAcfBlogPostFields &
-	WithAcfHomeFields &
 	WithAcfPostMeta & {
 		__typename?: 'Post';
 		/**
@@ -4944,8 +4989,6 @@ export type Post = ContentNode &
 		guid?: Maybe<Scalars['String']['output']>;
 		/** Whether the post object is password protected. */
 		hasPassword?: Maybe<Scalars['Boolean']['output']>;
-		/** Fields of the HomeFields ACF Field Group */
-		homeFields?: Maybe<HomeFields>;
 		/** The globally unique identifier of the post object. */
 		id: Scalars['ID']['output'];
 		/** Whether the node is a Comment */
@@ -11122,6 +11165,8 @@ export type WorkFields = AcfFieldGroup &
 		role?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 		/** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group */
 		siteUrl?: Maybe<Scalars['String']['output']>;
+		/** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group */
+		year?: Maybe<Scalars['Float']['output']>;
 	};
 
 /** Interface representing fields of the ACF &quot;WorkFields&quot; Field Group */
@@ -11141,6 +11186,8 @@ export type WorkFields_Fields = {
 	role?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 	/** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group */
 	siteUrl?: Maybe<Scalars['String']['output']>;
+	/** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;WorkFields&quot; Field Group */
+	year?: Maybe<Scalars['Float']['output']>;
 };
 
 /** Identifier types for retrieving a specific Work. Specifies which unique attribute is used to find an exact Work. */
@@ -11407,6 +11454,37 @@ export type ExperienceFieldsFragment = {
 	} | null;
 };
 
+export type HomePageFieldsFragment = {
+	id: string;
+	uri: string | null;
+	homeFields: {
+		heroSubtitle: string | null;
+		heroTitle: string | null;
+		latestWorkSubtitle: string | null;
+		latestWorkTitle: string | null;
+		personalTextTitle: string | null;
+		personalTextSubtitle: string | null;
+		personalText: string | null;
+		personalImage: {
+			node: {
+				id: string;
+				uri: string | null;
+				link: string | null;
+				sourceUrl: string | null;
+				altText: string | null;
+			};
+		} | null;
+	} | null;
+};
+
+export type MediaItemFieldsFragment = {
+	id: string;
+	uri: string | null;
+	link: string | null;
+	sourceUrl: string | null;
+	altText: string | null;
+};
+
 export type PostFieldsFragment = {
 	id: string;
 	title: string | null;
@@ -11415,7 +11493,15 @@ export type PostFieldsFragment = {
 	content: string | null;
 	excerpt: string | null;
 	categories: { nodes: Array<{ id: string; name: string | null; slug: string | null }> } | null;
-	featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
+	featuredImage: {
+		node: {
+			id: string;
+			uri: string | null;
+			link: string | null;
+			sourceUrl: string | null;
+			altText: string | null;
+		};
+	} | null;
 	postMeta: {
 		relatedWorks: {
 			edges: Array<{
@@ -11424,7 +11510,15 @@ export type PostFieldsFragment = {
 							slug: string | null;
 							title: string | null;
 							date: string | null;
-							featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
+							featuredImage: {
+								node: {
+									id: string;
+									uri: string | null;
+									link: string | null;
+									sourceUrl: string | null;
+									altText: string | null;
+								};
+							} | null;
 					  }
 					| Record<PropertyKey, never>;
 			}>;
@@ -11438,7 +11532,13 @@ export type PrivacyPolicyFieldsFragment = {
 	content: string | null;
 	uri: string | null;
 	featuredImage: {
-		node: { id: string; uri: string | null; sourceUrl: string | null; altText: string | null };
+		node: {
+			id: string;
+			uri: string | null;
+			link: string | null;
+			sourceUrl: string | null;
+			altText: string | null;
+		};
 	} | null;
 };
 
@@ -11448,7 +11548,13 @@ export type TermsOfServiceFieldsFragment = {
 	content: string | null;
 	uri: string | null;
 	featuredImage: {
-		node: { id: string; uri: string | null; sourceUrl: string | null; altText: string | null };
+		node: {
+			id: string;
+			uri: string | null;
+			link: string | null;
+			sourceUrl: string | null;
+			altText: string | null;
+		};
 	} | null;
 };
 
@@ -11464,9 +11570,18 @@ export type WorkFieldsFragment = {
 		siteUrl: string | null;
 		at: Array<string | null> | null;
 		role: Array<string | null> | null;
+		year: number | null;
 	} | null;
 	categories: { nodes: Array<{ id: string; name: string | null; slug: string | null }> } | null;
-	featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
+	featuredImage: {
+		node: {
+			id: string;
+			uri: string | null;
+			link: string | null;
+			sourceUrl: string | null;
+			altText: string | null;
+		};
+	} | null;
 };
 
 export type GetAboutPageQueryVariables = Exact<{ [key: string]: never }>;
@@ -11478,11 +11593,18 @@ export type GetAboutPageQuery = {
 		content: string | null;
 		uri: string | null;
 		featuredImage: {
-			node: { id: string; uri: string | null; sourceUrl: string | null; altText: string | null };
+			node: {
+				id: string;
+				uri: string | null;
+				link: string | null;
+				sourceUrl: string | null;
+				altText: string | null;
+			};
 		} | null;
 		aboutImages: Array<{
 			id: string;
 			uri: string | null;
+			link: string | null;
 			sourceUrl: string | null;
 			altText: string | null;
 		} | null> | null;
@@ -11511,6 +11633,33 @@ export type GetExperiencesQuery = {
 	} | null;
 };
 
+export type GetHomePageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetHomePageQuery = {
+	page: {
+		id: string;
+		uri: string | null;
+		homeFields: {
+			heroSubtitle: string | null;
+			heroTitle: string | null;
+			latestWorkSubtitle: string | null;
+			latestWorkTitle: string | null;
+			personalTextTitle: string | null;
+			personalTextSubtitle: string | null;
+			personalText: string | null;
+			personalImage: {
+				node: {
+					id: string;
+					uri: string | null;
+					link: string | null;
+					sourceUrl: string | null;
+					altText: string | null;
+				};
+			} | null;
+		} | null;
+	} | null;
+};
+
 export type PostsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type PostsQuery = {
@@ -11523,7 +11672,15 @@ export type PostsQuery = {
 			content: string | null;
 			excerpt: string | null;
 			categories: { nodes: Array<{ id: string; name: string | null; slug: string | null }> } | null;
-			featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
+			featuredImage: {
+				node: {
+					id: string;
+					uri: string | null;
+					link: string | null;
+					sourceUrl: string | null;
+					altText: string | null;
+				};
+			} | null;
 			postMeta: {
 				relatedWorks: {
 					edges: Array<{
@@ -11533,7 +11690,13 @@ export type PostsQuery = {
 									title: string | null;
 									date: string | null;
 									featuredImage: {
-										node: { sourceUrl: string | null; altText: string | null };
+										node: {
+											id: string;
+											uri: string | null;
+											link: string | null;
+											sourceUrl: string | null;
+											altText: string | null;
+										};
 									} | null;
 							  }
 							| Record<PropertyKey, never>;
@@ -11557,7 +11720,15 @@ export type PostQuery = {
 		content: string | null;
 		excerpt: string | null;
 		categories: { nodes: Array<{ id: string; name: string | null; slug: string | null }> } | null;
-		featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
+		featuredImage: {
+			node: {
+				id: string;
+				uri: string | null;
+				link: string | null;
+				sourceUrl: string | null;
+				altText: string | null;
+			};
+		} | null;
 		postMeta: {
 			relatedWorks: {
 				edges: Array<{
@@ -11567,7 +11738,13 @@ export type PostQuery = {
 								title: string | null;
 								date: string | null;
 								featuredImage: {
-									node: { sourceUrl: string | null; altText: string | null };
+									node: {
+										id: string;
+										uri: string | null;
+										link: string | null;
+										sourceUrl: string | null;
+										altText: string | null;
+									};
 								} | null;
 						  }
 						| Record<PropertyKey, never>;
@@ -11586,7 +11763,13 @@ export type GetPrivacyPolicyPageQuery = {
 		content: string | null;
 		uri: string | null;
 		featuredImage: {
-			node: { id: string; uri: string | null; sourceUrl: string | null; altText: string | null };
+			node: {
+				id: string;
+				uri: string | null;
+				link: string | null;
+				sourceUrl: string | null;
+				altText: string | null;
+			};
 		} | null;
 	} | null;
 };
@@ -11600,7 +11783,13 @@ export type GetTermsOfServicePageQuery = {
 		content: string | null;
 		uri: string | null;
 		featuredImage: {
-			node: { id: string; uri: string | null; sourceUrl: string | null; altText: string | null };
+			node: {
+				id: string;
+				uri: string | null;
+				link: string | null;
+				sourceUrl: string | null;
+				altText: string | null;
+			};
 		} | null;
 	} | null;
 };
@@ -11621,9 +11810,18 @@ export type WorksQuery = {
 				siteUrl: string | null;
 				at: Array<string | null> | null;
 				role: Array<string | null> | null;
+				year: number | null;
 			} | null;
 			categories: { nodes: Array<{ id: string; name: string | null; slug: string | null }> } | null;
-			featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
+			featuredImage: {
+				node: {
+					id: string;
+					uri: string | null;
+					link: string | null;
+					sourceUrl: string | null;
+					altText: string | null;
+				};
+			} | null;
 		}>;
 	} | null;
 };
@@ -11645,9 +11843,18 @@ export type WorkQuery = {
 			siteUrl: string | null;
 			at: Array<string | null> | null;
 			role: Array<string | null> | null;
+			year: number | null;
 		} | null;
 		categories: { nodes: Array<{ id: string; name: string | null; slug: string | null }> } | null;
-		featuredImage: { node: { sourceUrl: string | null; altText: string | null } } | null;
+		featuredImage: {
+			node: {
+				id: string;
+				uri: string | null;
+				link: string | null;
+				sourceUrl: string | null;
+				altText: string | null;
+			};
+		} | null;
 	} | null;
 };
 
@@ -11686,6 +11893,96 @@ export const ExperienceFieldsFragmentDoc = {
 		}
 	]
 } as unknown as DocumentNode<ExperienceFieldsFragment, unknown>;
+export const MediaItemFieldsFragmentDoc = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+				]
+			}
+		}
+	]
+} as unknown as DocumentNode<MediaItemFieldsFragment, unknown>;
+export const HomePageFieldsFragmentDoc = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'HomePageFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Page' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'homeFields' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'heroSubtitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'heroTitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'latestWorkSubtitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'latestWorkTitle' } },
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'personalImage' },
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'node' },
+												selectionSet: {
+													kind: 'SelectionSet',
+													selections: [
+														{
+															kind: 'FragmentSpread',
+															name: { kind: 'Name', value: 'MediaItemFields' }
+														}
+													]
+												}
+											}
+										]
+									}
+								},
+								{ kind: 'Field', name: { kind: 'Name', value: 'personalTextTitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'personalTextSubtitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'personalText' } }
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+				]
+			}
+		}
+	]
+} as unknown as DocumentNode<HomePageFieldsFragment, unknown>;
 export const PostFieldsFragmentDoc = {
 	kind: 'Document',
 	definitions: [
@@ -11735,8 +12032,7 @@ export const PostFieldsFragmentDoc = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
@@ -11792,12 +12088,11 @@ export const PostFieldsFragmentDoc = {
 																									kind: 'SelectionSet',
 																									selections: [
 																										{
-																											kind: 'Field',
-																											name: { kind: 'Name', value: 'sourceUrl' }
-																										},
-																										{
-																											kind: 'Field',
-																											name: { kind: 'Name', value: 'altText' }
+																											kind: 'FragmentSpread',
+																											name: {
+																												kind: 'Name',
+																												value: 'MediaItemFields'
+																											}
 																										}
 																									]
 																								}
@@ -11820,6 +12115,21 @@ export const PostFieldsFragmentDoc = {
 							]
 						}
 					}
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
 				]
 			}
 		}
@@ -11851,16 +12161,28 @@ export const PrivacyPolicyFieldsFragmentDoc = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
 							]
 						}
 					}
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
 				]
 			}
 		}
@@ -11892,16 +12214,28 @@ export const TermsOfServiceFieldsFragmentDoc = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
 							]
 						}
 					}
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
 				]
 			}
 		}
@@ -11932,7 +12266,8 @@ export const WorkFieldsFragmentDoc = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'githubUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'siteUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'at' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'role' } }
+								{ kind: 'Field', name: { kind: 'Name', value: 'role' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'year' } }
 							]
 						}
 					},
@@ -11969,14 +12304,28 @@ export const WorkFieldsFragmentDoc = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
 							]
 						}
 					}
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
 				]
 			}
 		}
@@ -12026,10 +12375,10 @@ export const GetAboutPageDocument = {
 												selectionSet: {
 													kind: 'SelectionSet',
 													selections: [
-														{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-														{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
-														{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-														{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+														{
+															kind: 'FragmentSpread',
+															name: { kind: 'Name', value: 'MediaItemFields' }
+														}
 													]
 												}
 											}
@@ -12042,16 +12391,28 @@ export const GetAboutPageDocument = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
 							]
 						}
 					}
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
 				]
 			}
 		}
@@ -12156,6 +12517,108 @@ export const GetExperiencesDocument = {
 		}
 	]
 } as unknown as DocumentNode<GetExperiencesQuery, GetExperiencesQueryVariables>;
+export const GetHomePageDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'GetHomePage' },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'page' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'id' },
+								value: { kind: 'StringValue', value: '/home/', block: false }
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'idType' },
+								value: { kind: 'EnumValue', value: 'URI' }
+							}
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'HomePageFields' } }
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'HomePageFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Page' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'homeFields' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'heroSubtitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'heroTitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'latestWorkSubtitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'latestWorkTitle' } },
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'personalImage' },
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'node' },
+												selectionSet: {
+													kind: 'SelectionSet',
+													selections: [
+														{
+															kind: 'FragmentSpread',
+															name: { kind: 'Name', value: 'MediaItemFields' }
+														}
+													]
+												}
+											}
+										]
+									}
+								},
+								{ kind: 'Field', name: { kind: 'Name', value: 'personalTextTitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'personalTextSubtitle' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'personalText' } }
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+} as unknown as DocumentNode<GetHomePageQuery, GetHomePageQueryVariables>;
 export const PostsDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12230,6 +12693,21 @@ export const PostsDocument = {
 		},
 		{
 			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
 			name: { kind: 'Name', value: 'PostFields' },
 			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Post' } },
 			selectionSet: {
@@ -12274,8 +12752,7 @@ export const PostsDocument = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
@@ -12331,12 +12808,11 @@ export const PostsDocument = {
 																									kind: 'SelectionSet',
 																									selections: [
 																										{
-																											kind: 'Field',
-																											name: { kind: 'Name', value: 'sourceUrl' }
-																										},
-																										{
-																											kind: 'Field',
-																											name: { kind: 'Name', value: 'altText' }
+																											kind: 'FragmentSpread',
+																											name: {
+																												kind: 'Name',
+																												value: 'MediaItemFields'
+																											}
 																										}
 																									]
 																								}
@@ -12409,6 +12885,21 @@ export const PostDocument = {
 		},
 		{
 			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
 			name: { kind: 'Name', value: 'PostFields' },
 			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Post' } },
 			selectionSet: {
@@ -12453,8 +12944,7 @@ export const PostDocument = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
@@ -12510,12 +13000,11 @@ export const PostDocument = {
 																									kind: 'SelectionSet',
 																									selections: [
 																										{
-																											kind: 'Field',
-																											name: { kind: 'Name', value: 'sourceUrl' }
-																										},
-																										{
-																											kind: 'Field',
-																											name: { kind: 'Name', value: 'altText' }
+																											kind: 'FragmentSpread',
+																											name: {
+																												kind: 'Name',
+																												value: 'MediaItemFields'
+																											}
 																										}
 																									]
 																								}
@@ -12580,6 +13069,21 @@ export const GetPrivacyPolicyPageDocument = {
 		},
 		{
 			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
 			name: { kind: 'Name', value: 'PrivacyPolicyFields' },
 			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Page' } },
 			selectionSet: {
@@ -12601,10 +13105,7 @@ export const GetPrivacyPolicyPageDocument = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
@@ -12653,6 +13154,21 @@ export const GetTermsOfServicePageDocument = {
 		},
 		{
 			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
 			name: { kind: 'Name', value: 'TermsOfServiceFields' },
 			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Page' } },
 			selectionSet: {
@@ -12674,10 +13190,7 @@ export const GetTermsOfServicePageDocument = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
@@ -12758,6 +13271,21 @@ export const WorksDocument = {
 		},
 		{
 			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
 			name: { kind: 'Name', value: 'WorkFields' },
 			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Work' } },
 			selectionSet: {
@@ -12778,7 +13306,8 @@ export const WorksDocument = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'githubUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'siteUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'at' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'role' } }
+								{ kind: 'Field', name: { kind: 'Name', value: 'role' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'year' } }
 							]
 						}
 					},
@@ -12815,8 +13344,7 @@ export const WorksDocument = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}
@@ -12873,6 +13401,21 @@ export const WorkDocument = {
 		},
 		{
 			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'MediaItemFields' },
+			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'MediaItem' } },
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'link' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+				]
+			}
+		},
+		{
+			kind: 'FragmentDefinition',
 			name: { kind: 'Name', value: 'WorkFields' },
 			typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Work' } },
 			selectionSet: {
@@ -12893,7 +13436,8 @@ export const WorkDocument = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'githubUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'siteUrl' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'at' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'role' } }
+								{ kind: 'Field', name: { kind: 'Name', value: 'role' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'year' } }
 							]
 						}
 					},
@@ -12930,8 +13474,7 @@ export const WorkDocument = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-											{ kind: 'Field', name: { kind: 'Name', value: 'altText' } }
+											{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'MediaItemFields' } }
 										]
 									}
 								}

@@ -7,14 +7,21 @@
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
-
-	const description =
-		"I'm Justin, a 23-year-old creative coder based in Amsterdam, focused on building accessible, motion-led digital experiences with GSAP, Framer Motion, Next.js and SvelteKit. I also develop custom themes for Shopify, HubSpot and WordPress, combining thoughtful design with reliable, flexible code. Away from the screen, you'll usually find me training for powerlifting and chasing a new personal best.";
 </script>
 
-<Seo title="Creative Coder" {description} />
+<Seo title={data.page.hero.subtitle} description={data.page.personal.text} />
 
-<Hero />
+<Hero title={data.page.hero.title} subtitle={data.page.hero.subtitle} />
 <KineticManifesto />
-<LatestWork items={data.works} />
-<PersonalIntro title="About me" {description} image="/images/justin.avif" />
+<LatestWork
+	items={data.works}
+	title={data.page.latestWork.title}
+	subtitle={data.page.latestWork.subtitle}
+/>
+<PersonalIntro
+	title={data.page.personal.title}
+	subtitle={data.page.personal.subtitle}
+	description={data.page.personal.text}
+	image={data.page.personal.image}
+	imageAlt={data.page.personal.imageAlt}
+/>

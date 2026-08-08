@@ -6,17 +6,11 @@ query GetAboutPage {
 		uri
 		featuredImage {
 			node {
-				id
-				uri
-				sourceUrl
-				altText
+				...MediaItemFields
 			}
 		}
 		aboutImages {
-			id
-			uri
-			sourceUrl
-			altText
+			...MediaItemFields
 		}
 	}
 }

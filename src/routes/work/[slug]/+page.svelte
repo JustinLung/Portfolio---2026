@@ -52,7 +52,7 @@
 				{#if data.work.year}
 					<div>
 						<dt>Year</dt>
-						<dd><time datetime={data.work.date}>{data.work.year}</time></dd>
+						<dd><time datetime={String(data.work.year)}>{data.work.year}</time></dd>
 					</div>
 				{/if}
 				{#if data.work.siteUrl}
