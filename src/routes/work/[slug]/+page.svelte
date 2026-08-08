@@ -133,7 +133,7 @@
 
 		.work-detail__excerpt {
 			margin-top: 24px;
-			max-width: 900px;
+			max-width: 768px;
 		}
 
 		.work-detail__link {
