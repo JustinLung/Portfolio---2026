@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -61,10 +61,10 @@
 
 		setupCards();
 
-		ScrollTrigger.create({
+		const trigger = ScrollTrigger.create({
 			trigger: '.sticky-cards',
 			start: 'top top',
-			end: `+=${window.innerHeight + 8}px`,
+			end: () => `+=${window.innerHeight + 8}px`,
 			pin: true,
 			pinSpacing: true,
 			scrub: 1,
@@ -74,13 +74,22 @@
 			}
 		});
 
+		// Mobile browsers fire resize when the URL bar collapses, so only react to width changes.
+		let lastWidth = window.innerWidth;
+
 		const handleResize = () => {
+			if (window.innerWidth === lastWidth) return;
+			lastWidth = window.innerWidth;
 			setupCards();
+			ScrollTrigger.refresh();
 		};
 
-		onDestroy(() => {
+		window.addEventListener('resize', handleResize);
+
+		return () => {
 			window.removeEventListener('resize', handleResize);
-		});
+			trigger.kill();
+		};
 	});
 </script>
 
@@ -101,8 +110,7 @@
 		height: 100vh;
 		width: 100vw;
 		overflow: hidden;
-		left: 50%;
-		transform: translateX(-50%);
+		left: calc(50% - 50vw);
 		display: flex;
 		justify-content: center;
 		align-items: center;
