@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { links, policyLinks, socialLinks } from '../../../utils/links';
+	import SoundToggle from '../shared/SoundToggle.svelte';
 
 	const year = new Date().getFullYear();
 </script>
@@ -20,7 +21,12 @@
 				<ul class="footer__links" role="list">
 					{#each links as link (link.href)}
 						<li>
-							<a href={resolve(link.href as '/')} class="link">{link.label}</a>
+							<a
+								href={resolve(link.href as '/')}
+								data-uisfx-hover="hover"
+								data-uisfx="forward"
+								class="link">{link.label}</a
+							>
 						</li>
 					{/each}
 				</ul>
@@ -31,8 +37,13 @@
 				<ul class="footer__links" role="list">
 					{#each socialLinks as link (link.href)}
 						<li>
-							<a href={link.href} target="_blank" rel="noopener noreferrer" class="link"
-								>{link.label}</a
+							<a
+								href={link.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								data-uisfx-hover="hover"
+								data-uisfx="forward"
+								class="link">{link.label}</a
 							>
 						</li>
 					{/each}
@@ -42,10 +53,15 @@
 
 		<div class="footer__meta font-small">
 			<p>© {year} Portfolio</p>
-			<div class="footer__policy-links">
-				{#each policyLinks as link (link.href)}
-					<a href={link.href} class="link">{link.label}</a>
-				{/each}
+			<div class="footer__controls">
+				<SoundToggle />
+				<div class="footer__policy-links">
+					{#each policyLinks as link (link.href)}
+						<a href={link.href} class="link" data-uisfx-hover="hover" data-uisfx="forward"
+							>{link.label}</a
+						>
+					{/each}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -148,6 +164,13 @@
 				text-decoration: underline;
 				text-underline-offset: 4px;
 			}
+		}
+
+		.footer__controls {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			gap: 16px 24px;
 		}
 
 		@media (--viewport-md-up) {

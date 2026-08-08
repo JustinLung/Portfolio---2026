@@ -28,7 +28,12 @@
 
 	<div class="write-hero__content">
 		<nav aria-label="Writing navigation">
-			<a class="write-hero__back link" href={resolve('/write')}>
+			<a
+				class="write-hero__back link"
+				href={resolve('/write')}
+				data-uisfx-hover="hover"
+				data-uisfx="back"
+			>
 				<span aria-hidden="true">←</span>
 				All writing
 			</a>
@@ -48,7 +53,7 @@
 	.write-hero {
 		display: grid;
 		gap: 24px;
-        margin-bottom: 32px;
+		margin-bottom: 32px;
 	}
 
 	.write-hero__media {
@@ -69,9 +74,9 @@
 	.write-hero__content {
 		display: grid;
 		gap: 24px;
-        width: 100%;
+		width: 100%;
 		max-width: 44rem;
-        margin-inline: auto;
+		margin-inline: auto;
 	}
 
 	.write-hero__back {

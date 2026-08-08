@@ -38,6 +38,9 @@ importers:
       three-custom-shader-material:
         specifier: ^6.4.0
         version: 6.4.0(three@0.185.1)
+      uisfx:
+        specifier: ^0.4.0
+        version: 0.4.0
     devDependencies:
       '@csstools/postcss-global-data':
         specifier: ^4.0.0
@@ -2641,6 +2644,9 @@ packages:
     resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
     hasBin: true
+
+  uisfx@0.4.0:
+    resolution: {integrity: sha512-W891N75C09cvpaNeChP+7BiP0Yp5VSbrIcRgZvzpFUT3o/2DxZqROmUcX50oxeyMnY4Hqxu4jEfjndVUpmheEQ==}
 
   unc-path-regex@0.1.2:
     resolution: {integrity: sha512-eXL4nmJT7oCpkZsHZUOJo8hcX3GbsiDOa0Qu9F646fi8dT3XuSVopVqAcEiVzSKKH7UoDti23wNX3qGFxcW5Qg==}
@@ -5420,6 +5426,8 @@ snapshots:
       - supports-color
 
   typescript@6.0.3: {}
+
+  uisfx@0.4.0: {}
 
   unc-path-regex@0.1.2: {}
 

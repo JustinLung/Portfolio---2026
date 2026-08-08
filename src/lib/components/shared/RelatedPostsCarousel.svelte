@@ -3,11 +3,13 @@
 	import BlogCard from './BlogCard.svelte';
 	import type { EmblaCarouselType } from 'embla-carousel';
 	import emblaCarouselSvelte from 'embla-carousel-svelte';
+	import { playSfx } from '$lib/sfx';
 
 	let { posts }: { posts: PostItem[] } = $props();
 	let emblaApi = $state<EmblaCarouselType>();
 	let canScrollPrev = $state(false);
 	let canScrollNext = $state(false);
+	let dragStartX: number | null = null;
 
 	const carouselOptions = {
 		align: 'start',
@@ -25,6 +27,25 @@
 		emblaApi.on('select', updateNavigation);
 		emblaApi.on('reInit', updateNavigation);
 	}
+
+	function scrollPrevious() {
+		if (!canScrollPrev) return;
+		playSfx('skip-previous');
+		emblaApi?.scrollPrev();
+	}
+
+	function scrollNext() {
+		if (!canScrollNext) return;
+		playSfx('skip-next');
+		emblaApi?.scrollNext();
+	}
+
+	function handleDragEnd(event: PointerEvent) {
+		if (dragStartX !== null && Math.abs(event.clientX - dragStartX) > 24) {
+			playSfx('swipe');
+		}
+		dragStartX = null;
+	}
 </script>
 
 {#if posts.length}
@@ -37,7 +58,8 @@
 						type="button"
 						aria-label="Previous posts"
 						disabled={!canScrollPrev}
-						onclick={() => emblaApi?.scrollPrev()}
+						data-uisfx-hover="hover"
+						onclick={scrollPrevious}
 					>
 						<span aria-hidden="true">←</span>
 					</button>
@@ -45,7 +67,8 @@
 						type="button"
 						aria-label="Next posts"
 						disabled={!canScrollNext}
-						onclick={() => emblaApi?.scrollNext()}
+						data-uisfx-hover="hover"
+						onclick={scrollNext}
 					>
 						<span aria-hidden="true">→</span>
 					</button>
@@ -60,6 +83,9 @@
 			aria-roledescription="carousel"
 			use:emblaCarouselSvelte={{ options: carouselOptions, plugins: [] }}
 			onemblaInit={handleEmblaInit}
+			onpointerdown={(event) => (dragStartX = event.clientX)}
+			onpointerup={handleDragEnd}
+			onpointercancel={() => (dragStartX = null)}
 		>
 			<div class="related-posts__track">
 				{#each posts as post, index (post.id)}

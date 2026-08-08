@@ -5,6 +5,7 @@
 	import WorkListCard from './WorkListCard.svelte';
 	import WorkListRow from './WorkListRow.svelte';
 	import type { WorkItem } from '../../../utils/types';
+	import { playSfx } from '$lib/sfx';
 
 	gsap.registerPlugin(Flip);
 
@@ -82,6 +83,7 @@
 		void animateLayout(() => {
 			selectedCategory = category;
 		});
+		playSfx('select');
 	}
 
 	function selectViewMode(mode: 'grid' | 'list') {
@@ -90,6 +92,7 @@
 		void animateLayout(() => {
 			viewMode = mode;
 		});
+		playSfx('select');
 	}
 
 	$effect(() => {
@@ -109,6 +112,7 @@
 			type="button"
 			class={selectedCategory === 'all' ? 'button button--secondary' : 'button'}
 			aria-pressed={selectedCategory === 'all'}
+			data-uisfx-hover="hover"
 			onclick={() => selectCategory('all')}
 		>
 			All
@@ -118,6 +122,7 @@
 				type="button"
 				class={selectedCategory === category ? 'button button--secondary' : 'button'}
 				aria-pressed={selectedCategory === category}
+				data-uisfx-hover="hover"
 				onclick={() => selectCategory(category)}
 			>
 				{category}
@@ -131,6 +136,7 @@
 			class="button work-list-view-button"
 			class:button--secondary={viewMode === 'list'}
 			aria-pressed={viewMode === 'list'}
+			data-uisfx-hover="hover"
 			onclick={() => selectViewMode('list')}
 		>
 			<span class="visually-hidden">List view</span>
@@ -146,6 +152,7 @@
 			class="button work-list-view-button"
 			class:button--secondary={viewMode === 'grid'}
 			aria-pressed={viewMode === 'grid'}
+			data-uisfx-hover="hover"
 			onclick={() => selectViewMode('grid')}
 		>
 			<span class="visually-hidden">Grid view</span>

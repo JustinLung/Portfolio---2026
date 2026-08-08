@@ -9,7 +9,12 @@
 </script>
 
 <article class="blog-card">
-	<a class="blog-card__link" href={resolve('/write/[slug]', { slug: item.slug })}>
+	<a
+		class="blog-card__link"
+		href={resolve('/write/[slug]', { slug: item.slug })}
+		data-uisfx-hover="hover"
+		data-uisfx="forward"
+	>
 		<figure class:blog-card__media--empty={!item.image} class="blog-card__media">
 			{#if item.image}
 				<img src={item.image} alt={item.imageAlt} loading="lazy" />

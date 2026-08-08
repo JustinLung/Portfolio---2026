@@ -22,7 +22,14 @@
 >
 	<header class="work-detail__aside">
 		<nav aria-label="Work navigation">
-			<a class="work-detail__back button" href={resolve('/work')}>Back to all work</a>
+			<a
+				class="work-detail__back button"
+				href={resolve('/work')}
+				data-uisfx-hover="hover"
+				data-uisfx="back"
+			>
+				Back to all work
+			</a>
 		</nav>
 
 		<h1 id="work-title">{data.work.title}</h1>
@@ -59,6 +66,8 @@
 								target="_blank"
 								rel="external noopener noreferrer"
 								class="work-detail__link"
+								data-uisfx-hover="hover"
+								data-uisfx="open"
 							>
 								Visit live site<span class="visually-hidden"> (opens in a new tab)</span>
 							</a>
@@ -74,6 +83,8 @@
 								target="_blank"
 								rel="external noopener noreferrer"
 								class="work-detail__link"
+								data-uisfx-hover="hover"
+								data-uisfx="open"
 							>
 								View on GitHub<span class="visually-hidden"> (opens in a new tab)</span>
 							</a>

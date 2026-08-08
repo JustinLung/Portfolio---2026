@@ -76,7 +76,14 @@
 				/>
 			{/each}
 		</ul>
-		<a href={resolve('/work')} class="button button--secondary">All works</a>
+		<a
+			href={resolve('/work')}
+			class="button button--secondary"
+			data-uisfx-hover="hover"
+			data-uisfx="forward"
+		>
+			All works
+		</a>
 	{:else}
 		<p class="latest-work__empty">No works found</p>
 	{/if}

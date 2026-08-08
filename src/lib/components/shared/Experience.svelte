@@ -9,7 +9,14 @@
 	An external-link row for a work or education experience.
 -->
 <li class="experience-item">
-	<a href={item.link} class="experience-item__link" target="_blank" rel="noopener noreferrer">
+	<a
+		href={item.link}
+		class="experience-item__link"
+		target="_blank"
+		rel="noopener noreferrer"
+		data-uisfx-hover="hover"
+		data-uisfx="open"
+	>
 		<span class="experience-item__title">{item.title}</span>
 		<span class="experience-item__role">{item.role}</span>
 		<span class="experience-item__year"
