@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { playSfx } from '$lib/sfx';
 	import gsap from 'gsap';
 	import { onMount, tick } from 'svelte';
 
@@ -91,6 +92,7 @@
 
 		const revealSite = async () => {
 			loadingComplete = true;
+			playSfx('complete');
 			await tick();
 
 			if (!message) {
