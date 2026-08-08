@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { playSfx } from '$lib/sfx';
+	import { playSfxIfUnlocked } from '$lib/sfx';
 	import gsap from 'gsap';
 	import { onMount, tick } from 'svelte';
 
@@ -91,8 +91,8 @@
 		root.style.overflow = 'hidden';
 
 		const revealSite = async () => {
+			void playSfxIfUnlocked('complete');
 			loadingComplete = true;
-			playSfx('complete');
 			await tick();
 
 			if (!message) {

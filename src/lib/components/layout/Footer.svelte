@@ -21,8 +21,11 @@
 				<ul class="footer__links" role="list">
 					{#each links as link (link.href)}
 						<li>
-							<a href={resolve(link.href as '/')} data-uisfx-hover="hover" class="link"
-								>{link.label}</a
+							<a
+								href={resolve(link.href as '/')}
+								data-uisfx-hover="hover"
+								data-uisfx="forward"
+								class="link">{link.label}</a
 							>
 						</li>
 					{/each}
@@ -39,6 +42,7 @@
 								target="_blank"
 								rel="noopener noreferrer"
 								data-uisfx-hover="hover"
+								data-uisfx="forward"
 								class="link">{link.label}</a
 							>
 						</li>
@@ -53,7 +57,9 @@
 				<SoundToggle />
 				<div class="footer__policy-links">
 					{#each policyLinks as link (link.href)}
-						<a href={link.href} class="link" data-uisfx-hover="hover">{link.label}</a>
+						<a href={link.href} class="link" data-uisfx-hover="hover" data-uisfx="forward"
+							>{link.label}</a
+						>
 					{/each}
 				</div>
 			</div>

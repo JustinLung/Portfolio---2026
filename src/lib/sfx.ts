@@ -9,12 +9,30 @@ import {
 
 let player: UISFXPlayer | null = null;
 let unbind: (() => void) | null = null;
+let context: AudioContext | null = null;
+
+function getAudioContext(): AudioContext | undefined {
+	if (typeof window === 'undefined') return undefined;
+
+	if (!context) {
+		const AudioContextClass =
+			window.AudioContext ??
+			(window as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+
+		if (!AudioContextClass) return undefined;
+
+		context = new AudioContextClass({ latencyHint: 'interactive' });
+	}
+
+	return context;
+}
 
 export function initializeSfx(root: Document): () => Promise<void> {
 	if (!player) {
 		player = createUISFX({
 			pack: 'glass',
-			volume: 0.7,
+			volume: 0.5,
+			context: getAudioContext(),
 			preferences: { key: 'portfolio:sound' }
 		});
 	}
@@ -27,6 +45,8 @@ export function initializeSfx(root: Document): () => Promise<void> {
 		unbind = null;
 		await player?.destroy();
 		player = null;
+		await context?.close();
+		context = null;
 	};
 }
 
@@ -36,6 +56,29 @@ export function unlockSfx(): Promise<boolean> {
 
 export function playSfx(cue: CueName, options?: PlayOptions): PlayingSFX | null {
 	return player?.play(cue, options) ?? null;
+}
+
+export function isSfxUnlocked(): boolean {
+	return context?.state === 'running';
+}
+
+/**
+ * Autoplay policies keep the audio context suspended until the visitor
+ * interacts, and a cue queued while suspended would fire on that later
+ * interaction instead of the moment it belongs to. Only play when audio is
+ * already permitted, giving the pending unlock a brief window to settle.
+ */
+export async function playSfxIfUnlocked(cue: CueName, options?: PlayOptions): Promise<void> {
+	if (!isSfxUnlocked()) {
+		const settled = await Promise.race([
+			unlockSfx(),
+			new Promise<boolean>((resolve) => window.setTimeout(() => resolve(isSfxUnlocked()), 150))
+		]);
+
+		if (!settled) return;
+	}
+
+	playSfx(cue, options);
 }
 
 export function isSfxEnabled(): boolean {
