@@ -71,7 +71,7 @@
 		</a>
 	</div>
 	<figure class="personal-intro__image">
-		<img src={image} alt={title} />
+		<img src={image} alt={title} loading="lazy" />
 	</figure>
 </section>
 

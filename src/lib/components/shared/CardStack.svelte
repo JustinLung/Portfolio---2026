@@ -98,7 +98,7 @@
 	{#each cardImages as image (image.url)}
 		<div class="card">
 			<div class="card-image">
-				<img src={image.url} alt={image.alt} />
+				<img src={image.url} alt={image.alt} loading="lazy" />
 			</div>
 		</div>
 	{/each}
