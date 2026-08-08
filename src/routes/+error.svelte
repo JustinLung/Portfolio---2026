@@ -7,7 +7,14 @@
 		<h1>404</h1>
 		<p>Page not found</p>
 	</div>
-	<a href={resolve('/')} class="button button--secondary">Go back to the home page</a>
+	<a
+		href={resolve('/')}
+		class="button button--secondary"
+		data-uisfx-hover="hover"
+		data-uisfx="back"
+	>
+		Go back to the home page
+	</a>
 </section>
 
 <style>
@@ -29,8 +36,8 @@
 	h1 {
 		font-size: 4rem;
 		font-weight: 700;
-        margin: 0;
-        padding: 0;
+		margin: 0;
+		padding: 0;
 	}
 
 	p {

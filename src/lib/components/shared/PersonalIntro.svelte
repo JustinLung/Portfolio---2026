@@ -60,7 +60,14 @@
 		<span class="personal-intro__eyebrow font-small">In short</span>
 		<h2 class="personal-intro__title">{title}</h2>
 		<p class="personal-intro__description">{description}</p>
-		<a href={resolve('/about')} class="button button--secondary">Read more</a>
+		<a
+			href={resolve('/about')}
+			class="button button--secondary"
+			data-uisfx-hover="hover"
+			data-uisfx="forward"
+		>
+			Read more
+		</a>
 	</div>
 	<figure class="personal-intro__image">
 		<img src={image} alt={title} />

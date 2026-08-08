@@ -12,8 +12,29 @@
 	import Lenis from '$lib/components/shared/Lenis.svelte';
 	import PageTransition from '$lib/components/shared/PageTransition.svelte';
 	import SiteLoader from '$lib/components/shared/SiteLoader.svelte';
+	import { initializeSfx, unlockSfx } from '$lib/sfx';
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
+
+	onMount(() => {
+		const destroySfx = initializeSfx(document);
+
+		const unlock = () => {
+			window.removeEventListener('pointerdown', unlock, true);
+			window.removeEventListener('keydown', unlock, true);
+			void unlockSfx();
+		};
+
+		window.addEventListener('pointerdown', unlock, { capture: true });
+		window.addEventListener('keydown', unlock, { capture: true });
+
+		return () => {
+			window.removeEventListener('pointerdown', unlock, true);
+			window.removeEventListener('keydown', unlock, true);
+			void destroySfx();
+		};
+	});
 </script>
 
 <svelte:head>

@@ -120,6 +120,8 @@
 	<a
 		href={resolve('/work/[slug]', { slug: item.slug })}
 		class="work-list-item__link"
+		data-uisfx-hover="hover"
+		data-uisfx="forward"
 		onfocus={showKeyboardPreview}
 		onblur={hidePreview}
 	>

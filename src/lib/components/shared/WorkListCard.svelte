@@ -18,7 +18,12 @@
 	class="work-list-item"
 	style={`--work-card-aspect-ratio: ${imageAspectRatio}; --work-card-mobile-aspect-ratio: ${mobileImageAspectRatio};`}
 >
-	<a href={resolve('/work/[slug]', { slug: item.slug })} class="work-list-item__link">
+	<a
+		href={resolve('/work/[slug]', { slug: item.slug })}
+		class="work-list-item__link"
+		data-uisfx-hover="hover"
+		data-uisfx="forward"
+	>
 		<figure class="work-list-item__media">
 			<img src={item.image ?? previewPlaceholder} alt={item.imageAlt ?? item.title} />
 		</figure>

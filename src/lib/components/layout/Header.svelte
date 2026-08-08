@@ -4,10 +4,22 @@
 	import gsap from 'gsap';
 	import { links } from '../../../utils/links';
 	import { onDestroy } from 'svelte';
+	import { playSfx } from '$lib/sfx';
 
 	let menuOpen = $state(false);
 	let navigation: HTMLElement;
 	let headerHeight = $state(0);
+
+	function toggleMenu() {
+		menuOpen = !menuOpen;
+		playSfx(menuOpen ? 'open' : 'close');
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key !== 'Escape' || !menuOpen) return;
+		menuOpen = false;
+		playSfx('close');
+	}
 
 	$effect(() => {
 		const open = menuOpen;
@@ -24,12 +36,12 @@
 		});
 	});
 
-    onDestroy(() => {
-        gsap.killTweensOf(navigation);
-    });
+	onDestroy(() => {
+		gsap.killTweensOf(navigation);
+	});
 </script>
 
-<svelte:window onkeydown={(event) => event.key === 'Escape' && (menuOpen = false)} />
+<svelte:window onkeydown={handleKeydown} />
 
 {#snippet navigationLinks()}
 	<ul class="header__links" role="list" aria-label="Main navigation">
@@ -41,8 +53,9 @@
 					class:link--active={page.url.pathname === link.href}
 					aria-current={page.url.pathname === link.href ? 'page' : undefined}
 					aria-label={link.label}
-					onclick={() => (menuOpen = false)}
-					>{link.label}</a
+					data-uisfx-hover="hover"
+					data-uisfx="forward"
+					onclick={() => (menuOpen = false)}>{link.label}</a
 				>
 			</li>
 		{/each}
@@ -50,7 +63,9 @@
 {/snippet}
 
 <header class="header container" bind:clientHeight={headerHeight}>
-	<a href={resolve('/')} class="header__logo"> Portfolio </a>
+	<a href={resolve('/')} class="header__logo" data-uisfx-hover="hover" data-uisfx="back">
+		Portfolio
+	</a>
 
 	<button
 		class="header__menu-button"
@@ -58,7 +73,8 @@
 		aria-expanded={menuOpen}
 		aria-controls="main-navigation"
 		aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-		onclick={() => (menuOpen = !menuOpen)}
+		data-uisfx-hover="hover"
+		onclick={toggleMenu}
 	>
 		<span class="header__menu-icon">
 			<span class="header__menu-bar"></span>

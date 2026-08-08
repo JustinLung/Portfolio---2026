@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { socialLinks } from '../../utils/links';
+	import { playSfx } from '$lib/sfx';
 
 	const email = 'justinlung77@gmail.com';
 
@@ -14,7 +15,14 @@
 		const replyTo = String(data.get('email') ?? '');
 		const body = `Hi Justin,\n\n${message}\n\nFrom: ${name}\nEmail: ${replyTo}`;
 
+		playSfx('send');
 		window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+	}
+
+	function handleFieldFocus(event: FocusEvent) {
+		if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+			playSfx('focus');
+		}
 	}
 </script>
 
@@ -37,7 +45,7 @@
 			<dl>
 				<div>
 					<dt class="font-small">Email</dt>
-					<dd><a class="link" href={`mailto:${email}`}>{email}</a></dd>
+					<dd><a class="link" href={`mailto:${email}`} data-uisfx-hover="hover">{email}</a></dd>
 				</div>
 				<div>
 					<dt class="font-small">Based in</dt>
@@ -47,7 +55,13 @@
 					<dt class="font-small">Elsewhere</dt>
 					<dd class="contact-info__socials">
 						{#each socialLinks as link (link.href)}
-							<a class="link" href={link.href} target="_blank" rel="noopener noreferrer">
+							<a
+								class="link"
+								href={link.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								data-uisfx-hover="hover"
+							>
 								{link.label}
 							</a>
 						{/each}
@@ -56,7 +70,7 @@
 			</dl>
 		</aside>
 
-		<form class="contact-form" onsubmit={sendEmail}>
+		<form class="contact-form" onfocusin={handleFieldFocus} onsubmit={sendEmail}>
 			<div class="contact-form__row">
 				<label>
 					<span class="font-small">Name</span>
@@ -88,7 +102,7 @@
 					required></textarea>
 			</label>
 
-			<button class="button contact-form__submit" type="submit">
+			<button class="button contact-form__submit" type="submit" data-uisfx-hover="hover">
 				Send inquiry
 				<span aria-hidden="true">↗</span>
 			</button>
@@ -125,7 +139,6 @@
 	}
 
 	.contact-info {
-
 		dl {
 			display: grid;
 			gap: 24px;
