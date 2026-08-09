@@ -26,7 +26,7 @@
 	{/if}
 </article>
 
-<RelatedPostsCarousel posts={data.relatedPosts} />
+<RelatedPostsCarousel posts={data.relatedPosts} title="Related posts" />
 
 <style>
 	.post {

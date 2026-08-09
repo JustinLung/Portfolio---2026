@@ -5,7 +5,7 @@
 	import emblaCarouselSvelte from 'embla-carousel-svelte';
 	import { playSfx } from '$lib/sfx';
 
-	let { posts }: { posts: PostItem[] } = $props();
+	let { posts, title }: { posts: PostItem[]; title: string } = $props();
 	let emblaApi = $state<EmblaCarouselType>();
 	let canScrollPrev = $state(false);
 	let canScrollNext = $state(false);
@@ -51,7 +51,7 @@
 {#if posts.length}
 	<section class="related-posts" aria-labelledby="related-posts-title">
 		<header class="related-posts__header">
-			<h2 id="related-posts-title">Related posts</h2>
+			<h2 id="related-posts-title">{title}</h2>
 			{#if canScrollPrev || canScrollNext}
 				<div class="related-posts__navigation" aria-label="Carousel navigation">
 					<button
@@ -105,7 +105,7 @@
 
 <style>
 	.related-posts {
-		margin-bottom: 128px;
+		margin-bottom: 64px;
 	}
 
 	.related-posts__header {
@@ -134,9 +134,9 @@
 			color: inherit;
 			cursor: pointer;
 			transition:
-				background-color 200ms ease,
-				color 200ms ease,
-				opacity 200ms ease;
+				background-color 300ms var(--ease-out-expo),
+				color 300ms var(--ease-out-expo),
+				opacity 300ms var(--ease-out-expo);
 		}
 
 		button:hover:not(:disabled),
@@ -186,6 +186,10 @@
 		}
 
 		@media (--viewport-lg-up) {
+			flex-basis: 33.333%;
+		}
+
+		@media (--viewport-xl-up) {
 			flex-basis: 25%;
 		}
 	}

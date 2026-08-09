@@ -79,7 +79,7 @@
 	.personal-intro {
 		display: grid;
 		gap: 48px;
-		margin-block: 128px;
+		margin-bottom: 128px;
 		padding-top: 24px;
 		border-top: 1px solid var(--color-primary);
 	}

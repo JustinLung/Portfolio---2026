@@ -3,6 +3,7 @@
 	import KineticManifesto from '$lib/components/shared/KineticManifesto.svelte';
 	import LatestWork from '$lib/components/shared/LatestWork.svelte';
 	import PersonalIntro from '$lib/components/shared/PersonalIntro.svelte';
+	import RelatedPostsCarousel from '$lib/components/shared/RelatedPostsCarousel.svelte';
 	import Seo from '$lib/components/shared/Seo.svelte';
 	import type { PageProps } from './$types';
 
@@ -18,6 +19,7 @@
 	title={data.page.latestWork.title}
 	subtitle={data.page.latestWork.subtitle}
 />
+<RelatedPostsCarousel posts={data.relatedPosts} title="Latest posts" />
 <PersonalIntro
 	title={data.page.personal.title}
 	subtitle={data.page.personal.subtitle}

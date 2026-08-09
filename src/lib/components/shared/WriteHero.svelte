@@ -19,7 +19,7 @@
 	const formattedDate = $derived(formatShortDate(date));
 </script>
 
-<header class="write-hero">
+<header class="write-hero" class:write-hero--no-image={!image}>
 	{#if image}
 		<figure class="write-hero__media">
 			<img src={image} alt={imageAlt} />
@@ -54,6 +54,10 @@
 		display: grid;
 		gap: 24px;
 		margin-bottom: 32px;
+	}
+
+	.write-hero--no-image {
+		padding-top: 64px;
 	}
 
 	.write-hero__media {

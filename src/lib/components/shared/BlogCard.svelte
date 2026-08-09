@@ -103,8 +103,7 @@
 		}
 
 		.blog-card__title {
-			max-width: 24ch;
-			font-size: 1.5rem;
+			font-size: 1.125rem;
 			text-wrap: balance;
 			transition: color 300ms ease;
 		}
