@@ -15,17 +15,30 @@
 			<Experience {item} />
 		{/each}
 	</ul>
+	<a
+		href="/justinlung-cv.pdf"
+		class="button button--secondary button--download"
+		target="_blank"
+		rel="noopener noreferrer"
+		data-uisfx-hover="hover"
+		data-uisfx="forward">My full work history</a
+	>
 </section>
 
 <style>
 	.experiences {
-		padding-block: 128px;
+		margin-top: 128px;
 
 		.experiences__list {
 			display: flex;
 			flex-direction: column;
 			list-style: none;
-            padding: 0;
+			padding: 0;
+		}
+
+		.button--download {
+			margin-top: 32px;
+			margin-inline: auto;
 		}
 	}
 </style>
