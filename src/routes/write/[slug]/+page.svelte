@@ -54,4 +54,28 @@
 		text-decoration: underline;
 		text-underline-offset: 0.2em;
 	}
+
+	.post__content :global(code) {
+		font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+		font-size: 0.875em;
+		background: var(--color-tertiary);
+		padding: 0.15em 0.4em;
+		border-radius: 4px;
+	}
+
+	.post__content :global(pre) {
+		background: var(--color-tertiary);
+		padding: 1rem 1.25rem;
+		border-radius: 8px;
+		overflow-x: auto;
+		margin-block: 1.5rem;
+	}
+
+	.post__content :global(pre code) {
+		background: none;
+		padding: 0;
+		border-radius: 0;
+		font-size: 0.85em;
+		line-height: 1.6;
+	}
 </style>
