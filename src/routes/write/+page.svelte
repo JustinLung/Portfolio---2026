@@ -2,8 +2,8 @@
 	import { tick } from 'svelte';
 	import gsap from 'gsap';
 	import { Flip } from 'gsap/Flip';
-	import BlogCard from '$lib/components/shared/BlogCard.svelte';
-	import Seo from '$lib/components/shared/Seo.svelte';
+	import BlogCard from '$lib/components/shared/post-components/BlogCard.svelte';
+	import Seo from '$lib/components/shared/misc/Seo.svelte';
 	import { playSfx } from '$lib/sfx';
 	import type { PageProps } from './$types';
 

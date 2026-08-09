@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import Seo from '$lib/components/shared/Seo.svelte';
+	import Seo from '$lib/components/shared/misc/Seo.svelte';
 	import { onMount } from 'svelte';
 	import { observeHeaderHeight } from '../../../utils/header-height';
 	import type { PageProps } from './$types';

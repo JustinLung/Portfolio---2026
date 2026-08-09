@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PostItem } from '../../../utils/types';
+	import type { PostItem } from '../../../../utils/types';
 	import BlogCard from './BlogCard.svelte';
 	import type { EmblaCarouselType } from 'embla-carousel';
 	import emblaCarouselSvelte from 'embla-carousel-svelte';

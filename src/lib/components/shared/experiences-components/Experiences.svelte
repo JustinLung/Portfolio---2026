@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ExperienceItem } from '../../../utils/types';
+	import type { ExperienceItem } from '../../../../utils/types';
 	import Experience from './Experience.svelte';
 
 	let { items }: { items: ExperienceItem[] } = $props();

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { formatShortDate } from '../../../utils/date';
-	import type { PostItem } from '../../../utils/types';
+	import { formatShortDate } from '../../../../utils/date';
+	import type { PostItem } from '../../../../utils/types';
 
 	let { item }: { item: PostItem } = $props();
 

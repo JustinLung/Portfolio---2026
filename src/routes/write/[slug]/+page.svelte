@@ -1,7 +1,7 @@
 <script lang="ts">
-	import RelatedPostsCarousel from '$lib/components/shared/RelatedPostsCarousel.svelte';
-	import Seo from '$lib/components/shared/Seo.svelte';
-	import WriteHero from '$lib/components/shared/WriteHero.svelte';
+	import RelatedPostsCarousel from '$lib/components/shared/post-components/RelatedPostsCarousel.svelte';
+	import Seo from '$lib/components/shared/misc/Seo.svelte';
+	import WriteHero from '$lib/components/shared/post-components/WriteHero.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();

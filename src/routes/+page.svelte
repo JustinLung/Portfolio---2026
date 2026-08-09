@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Hero from '$lib/components/shared/Hero.svelte';
-	import KineticManifesto from '$lib/components/shared/KineticManifesto.svelte';
-	import LatestWork from '$lib/components/shared/LatestWork.svelte';
-	import PersonalIntro from '$lib/components/shared/PersonalIntro.svelte';
-	import RelatedPostsCarousel from '$lib/components/shared/RelatedPostsCarousel.svelte';
-	import Seo from '$lib/components/shared/Seo.svelte';
+	import Hero from '$lib/components/shared/hero-components/Hero.svelte';
+	import KineticManifesto from '$lib/components/shared/ui/KineticManifesto.svelte';
+	import LatestWork from '$lib/components/shared/work-components/LatestWork.svelte';
+	import PersonalIntro from '$lib/components/shared/misc/PersonalIntro.svelte';
+	import RelatedPostsCarousel from '$lib/components/shared/post-components/RelatedPostsCarousel.svelte';
+	import Seo from '$lib/components/shared/misc/Seo.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();

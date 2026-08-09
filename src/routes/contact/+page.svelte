@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Seo from '$lib/components/shared/Seo.svelte';
+	import Seo from '$lib/components/shared/misc/Seo.svelte';
 	import { socialLinks } from '../../utils/links';
 	import { playSfx } from '$lib/sfx';
 

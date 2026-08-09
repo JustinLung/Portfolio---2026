@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { AboutProps } from '../../../utils/types';
+	import type { AboutProps } from '../../../../utils/types';
 	
 	const { title, content, src, alt }: AboutProps = $props();
 </script>
