@@ -3,7 +3,7 @@
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-	import type { CardStackProps } from '../../../utils/types';
+	import type { CardStackProps } from '../../../../utils/types';
 
 	const { title = 'Captured moments', cardImages }: CardStackProps = $props();
 

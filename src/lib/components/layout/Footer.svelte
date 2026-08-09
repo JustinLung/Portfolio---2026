@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { links, policyLinks, socialLinks } from '../../../utils/links';
-	import SoundToggle from '../shared/SoundToggle.svelte';
+	import SoundToggle from '../shared/ui/SoundToggle.svelte';
 
 	const year = new Date().getFullYear();
 

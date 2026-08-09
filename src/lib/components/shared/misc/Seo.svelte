@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SeoProps } from '../../../utils/types';
+	import type { SeoProps } from '../../../../utils/types';
 
 	const DEFAULT_KEYWORDS =
 		'Justin, Creative Coder, Amsterdam, GSAP, Framer Motion, Next.js, SvelteKit';

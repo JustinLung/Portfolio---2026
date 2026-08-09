@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-	import type { WorkItem } from '../../../utils/types';
+	import type { WorkItem } from '../../../../utils/types';
 	import WorkListCard from './WorkListCard.svelte';
 
 	gsap.registerPlugin(ScrollTrigger);

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { formatShortDate } from '../../../utils/date';
+	import { formatShortDate } from '../../../../utils/date';
 
 	let {
 		image,

@@ -6,7 +6,7 @@
 
 	gsap.registerPlugin(ScrollTrigger);
 
-	import type { PersonalIntroProps } from '../../../utils/types';
+	import type { PersonalIntroProps } from '../../../../utils/types';
 
 	let { title, subtitle, description, image, imageAlt }: PersonalIntroProps = $props();
 	let sectionRef: HTMLElement;

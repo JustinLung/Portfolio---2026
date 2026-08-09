@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Seo from '$lib/components/shared/Seo.svelte';
-	import WorkList from '$lib/components/shared/WorkList.svelte';
+	import Seo from '$lib/components/shared/misc/Seo.svelte';
+	import WorkList from '$lib/components/shared/work-components/WorkList.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
