@@ -5,7 +5,9 @@
 <section>
 	<div class="error-container">
 		<h1>404</h1>
-		<p>Page not found</p>
+		<p>
+			I swear this worked on my local machine. The page you’re looking for doesn’t exist (anymore).
+		</p>
 	</div>
 	<a
 		href={resolve('/')}
@@ -34,13 +36,24 @@
 	}
 
 	h1 {
-		font-size: 4rem;
+		font-size: 6rem;
 		font-weight: 700;
 		margin: 0;
 		padding: 0;
+		line-height: 1;
+
+		@media (--viewport-lg-up) {
+			font-size: 12rem;
+		}
 	}
 
 	p {
-		font-size: 1.5rem;
+		font-size: 1rem;
+		max-width: 520px;
+		text-align: center;
+
+		@media (--viewport-lg-up) {
+			font-size: 1.5rem;
+		}
 	}
 </style>
