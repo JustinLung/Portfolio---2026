@@ -14,7 +14,24 @@
 		return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	}
 
-	function positionPreview(event: PointerEvent) {
+	function getPointerPreviewPosition(event: PointerEvent) {
+		if (!previewRef) return { x: event.clientX, y: event.clientY };
+
+		const { width, height } = previewRef.getBoundingClientRect();
+		const gap = 24;
+		const edgePadding = 8;
+		const fitsOnRight = event.clientX + gap + width <= window.innerWidth - edgePadding;
+		const preferredX = fitsOnRight ? event.clientX + gap : event.clientX - gap - width;
+		const maxX = Math.max(edgePadding, window.innerWidth - width - edgePadding);
+		const maxY = Math.max(edgePadding, window.innerHeight - height - edgePadding);
+
+		return {
+			x: gsap.utils.clamp(edgePadding, maxX, preferredX),
+			y: gsap.utils.clamp(edgePadding, maxY, event.clientY - height / 2)
+		};
+	}
+
+	function positionPreview(event: PointerEvent, positionImmediately = false) {
 		if (
 			!previewRef ||
 			event.pointerType === 'touch' ||
@@ -30,20 +47,23 @@
 		const distanceY = event.clientY - previousPointer.y;
 		const velocityX = previousPointer.time === 0 ? 0 : distanceX / elapsed;
 		const speed = previousPointer.time === 0 ? 0 : Math.hypot(distanceX, distanceY) / elapsed;
+		const { x, y } = getPointerPreviewPosition(event);
 
 		previousPointer = { x: event.clientX, y: event.clientY, time: now };
 		settleTween?.kill();
 
+		if (positionImmediately) {
+			gsap.set(previewRef, { x, y });
+		}
+
 		gsap.to(previewRef, {
-			x: event.clientX + 24,
-			y: event.clientY,
-			xPercent: 0,
-			yPercent: -50,
+			x,
+			y,
 			opacity: 1,
 			rotation: reduceMotion ? 0 : gsap.utils.clamp(-3, 3, velocityX * 2.5),
 			scale: reduceMotion ? 1 : 1 + gsap.utils.clamp(0, 0.025, speed * 0.01),
 			duration: reduceMotion ? 0 : 0.28,
-			ease: 'power2.out',
+			ease: 'expo.out',
 			overwrite: 'auto'
 		});
 
@@ -58,24 +78,23 @@
 
 	function showPointerPreview(event: PointerEvent) {
 		previousPointer.time = 0;
-		positionPreview(event);
+		positionPreview(event, true);
 	}
 
 	function showKeyboardPreview() {
 		if (!previewRef) return;
 
 		const reduceMotion = prefersReducedMotion();
+		const { width, height } = previewRef.getBoundingClientRect();
 
 		gsap.to(previewRef, {
-			x: window.innerWidth / 2,
-			y: window.innerHeight / 2,
-			xPercent: -50,
-			yPercent: -50,
+			x: (window.innerWidth - width) / 2,
+			y: (window.innerHeight - height) / 2,
 			opacity: 1,
 			rotation: 0,
 			scale: 1,
 			duration: reduceMotion ? 0 : 0.2,
-			ease: 'power3.out',
+			ease: 'expo.out',
 			overwrite: 'auto'
 		});
 	}
@@ -91,7 +110,7 @@
 			rotation: 0,
 			scale: 0.94,
 			duration: prefersReducedMotion() ? 0 : 0.3,
-			ease: 'power3.out',
+			ease: 'expo.out',
 			overwrite: 'auto'
 		});
 	}
