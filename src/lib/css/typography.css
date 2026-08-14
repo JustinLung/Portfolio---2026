@@ -150,54 +150,78 @@ body {
 
 h1,
 .font-heading-1 {
-	font-size: 3.5rem;
-	line-height: 1.2;
-	letter-spacing: -0.02em;
-	margin: 0;
-}
-
-h2,
-.font-heading-2 {
 	font-size: 2.5rem;
 	line-height: 1.2;
 	letter-spacing: -0.02em;
 	margin: 0;
+
+	@media (--viewport-lg-up) {
+		font-size: 3.5rem;
+	}
 }
 
-h3,
-.font-heading-3 {
+h2,
+.font-heading-2 {
 	font-size: 2rem;
 	line-height: 1.2;
 	letter-spacing: -0.02em;
 	margin: 0;
+
+	@media (--viewport-lg-up) {
+		font-size: 2.5rem;
+	}
 }
 
-h4,
-.font-heading-4 {
+h3,
+.font-heading-3 {
 	font-size: 1.5rem;
 	line-height: 1.2;
 	letter-spacing: -0.02em;
 	margin: 0;
+
+	@media (--viewport-lg-up) {
+		font-size: 2rem;
+	}
 }
 
-h5,
-.font-heading-5 {
+h4,
+.font-heading-4 {
 	font-size: 1.25rem;
 	line-height: 1.2;
 	letter-spacing: -0.02em;
 	margin: 0;
+
+	@media (--viewport-lg-up) {
+		font-size: 1.5rem;
+	}
 }
 
-h6,
-.font-heading-6 {
+h5,
+.font-heading-5 {
 	font-size: 1.125rem;
 	line-height: 1.2;
 	letter-spacing: -0.02em;
 	margin: 0;
+
+	@media (--viewport-lg-up) {
+		font-size: 1.25rem;
+	}
+}
+
+h6,
+.font-heading-6 {
+	font-size: 1rem;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+	margin: 0;
+
+	@media (--viewport-lg-up) {
+		font-size: 1.125rem;
+	}
 }
 
 p {
-	font-size: 0.875rem;
+	font-size: 1rem;
 	line-height: 1.5;
 	letter-spacing: -0.02em;
 }
