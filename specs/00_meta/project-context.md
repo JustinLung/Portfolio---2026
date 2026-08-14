@@ -34,6 +34,9 @@ creative and technical range, and gives prospective collaborators a clear path t
 - Component-scoped CSS plus global PostCSS design tokens
 - GSAP for orchestrated interaction and scroll motion
 - Lenis for smooth scrolling
+- Threlte / Three.js for the home hero scene
+- Embla for carousels
+- uisfx for interface audio
 
 Exact installed versions are defined by `package.json` and the lockfile.
 

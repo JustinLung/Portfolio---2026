@@ -38,15 +38,16 @@
 - General Sans is the body family and supports weights `200` through `700`, including italics.
 - Fragment Mono is the heading family and supports regular and italic styles at weight `400`.
 - Headings and body copy inherit the correct families by default.
-- Use `.font-heading`, `.font-body`, `.font-medium`, `.font-italic`, and `.font-bold` only when an
-  element needs an explicit override.
+- Use `.font-heading`, `.font-body`, `.font-medium`, `.font-italic`, `.font-bold`, `.font-small`,
+  and `.font-heading-1` through `.font-heading-6` only when an element needs an explicit override.
 - In component CSS, use `var(--font-family-heading)` and `var(--font-family-body)` rather than
   repeating font-family values.
 
 ### Colors and global styles
 
 - Use the semantic custom properties from `src/lib/css/colors.css`, such as
-  `var(--color-primary)` and `var(--color-white)`.
+  `var(--color-primary)`, `var(--color-quaternary)`, `var(--color-white)`, and the
+  availability greens/reds. Do not introduce a one-off hex when a token exists.
 - Add a stylesheet to `src/lib/css/` only when it defines a reusable project-wide token or
   primitive, then import it once from `src/routes/+layout.svelte`.
 - Keep feature- and component-specific styles inside the component's `<style>` block.
@@ -77,8 +78,14 @@ Viewport suffixes are `sm`, `md`, `lg`, `xl`, and `2xl`. Use `-up` for minimum-w
 `-down` for maximum-width queries. Use `--motion-reduce` and `--motion-allow` for motion
 preferences.
 
-## Audio usage
-- for every interaction like hover, click add a sound effect with the uisfx package.
+## Audio
+
+- Interface audio uses `uisfx` through `src/lib/sfx.ts`. Initialize once from the root layout.
+- Add `data-uisfx` and `data-uisfx-hover` on interactive elements (links, buttons, cards).
+- Call `playSfx()` only when a cue cannot be declared on the element (submit, filter, toggle).
+- Use `playSfxIfUnlocked()` when a cue might fire before the visitor has unlocked audio.
+- Keep the footer `SoundToggle` as the visitor control; do not add a second mute path.
+- Every action must remain complete with sound off, reduced motion, or a blocked audio context.
 
 ## Design principles
 
@@ -107,6 +114,8 @@ Standards:
 - Do not animate layout continuously when a FLIP transition can preserve spatial continuity.
 - Scroll-linked animation must not trap scrolling or delay access to content.
 - Pointer-follow effects must deactivate for touch/coarse pointers and tolerate pointer exit.
+- WebGL (Threlte) and View Transition page curtains are progressive enhancement; they must not
+  block content or navigation when unsupported.
 - Check `prefers-reduced-motion` before creating animation and provide an equivalent static state.
 - Reduced motion means removing nonessential travel, parallax, scrub, and smooth scrolling—not merely
   shortening every duration.

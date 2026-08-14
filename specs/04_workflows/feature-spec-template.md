@@ -52,6 +52,7 @@ behavior. Specify what reflows, wraps, stacks, scrolls, or disappears and why.
 ### Interaction
 
 Define pointer, touch, keyboard, focus, hover, pressed, selected, disabled, and interrupted states.
+Note any `data-uisfx` cues or `playSfx()` calls; sound-off must remain equivalent.
 
 ### Motion
 

@@ -97,3 +97,90 @@ Feature styling remains in component `<style>` blocks and consumes those shared 
 - One-off values do not automatically become global tokens.
 - Hard-coded values require a feature-specific reason when a semantic token exists.
 - New global styles must be imported once through the root layout.
+
+## ADR-004: Writing is a first-class content type
+
+- **Date:** 2026-08-14
+- **Status:** Accepted
+- **Related spec:** Existing architecture
+
+### Context
+
+The CMS already publishes posts. Visitors need a path to scan writing without mixing it into work.
+
+### Decision
+
+Writing lives at `/write` and `/write/[slug]`, mapped through `PostFields` → `toPostItem()` →
+`PostItem`. Home shows a related-posts carousel. Category filters apply on the writing index.
+
+### Consequences
+
+- Posts follow the same published-only, 404, and 5xx contracts as work.
+- GraphQL documents, generated types, mapper, and `PostItem` must evolve together.
+- Work and writing stay separate routes and entities.
+
+## ADR-005: Contact uses mailto, not a stored form
+
+- **Date:** 2026-08-14
+- **Status:** Accepted
+- **Related spec:** Existing architecture
+
+### Context
+
+The site needs a low-friction inquiry path without operating an inbox, spam filter, or message store.
+
+### Decision
+
+`/contact` is a client-only route. Submitting the form opens the visitor's mail client via `mailto:`
+with name, reply-to, subject, and message. Email and social links are also listed on the page.
+
+### Consequences
+
+- No WordPress or server action is required for contact.
+- Success depends on a working mail client; there is no delivery confirmation in the app.
+- The published address and social links must stay current.
+
+## ADR-006: Interface audio is progressive enhancement
+
+- **Date:** 2026-08-14
+- **Status:** Accepted
+- **Related spec:** Existing architecture
+
+### Context
+
+Hover and click cues support the site's tactile identity, but autoplay policies, preference, and
+accessibility mean audio cannot be required.
+
+### Decision
+
+`uisfx` is initialized once in the root layout. Interactive elements declare cues with `data-uisfx`
+attributes. A footer toggle persists mute preference. Audio unlocks on first pointer or keyboard
+interaction.
+
+### Consequences
+
+- Every action works with sound off or blocked.
+- New interactions should add a cue unless there is a reason not to.
+- Do not introduce a second audio stack or mute control.
+
+## ADR-007: Home hero WebGL is progressive enhancement
+
+- **Date:** 2026-08-14
+- **Status:** Accepted
+- **Related spec:** Existing architecture
+
+### Context
+
+The home identity uses a Threlte / Three.js scene. WebGL, reduced motion, and load cost can fail
+independently of the rest of the page.
+
+### Decision
+
+Hero copy and navigation render without the canvas. The 3D scene enhances the hero when the
+browser can run it. Reduced motion must not leave the visitor without the same content.
+
+### Consequences
+
+- Hero copy is CMS content, not baked into the shader.
+- New 3D work stays isolated under `hero-components/` and must clean up on unmount.
+- Performance budgets for the home route include the scene without making it blocking.

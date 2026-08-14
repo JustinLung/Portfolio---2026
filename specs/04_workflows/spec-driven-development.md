@@ -15,6 +15,7 @@ Define the complete experience before choosing implementation details:
 - content hierarchy and primary action;
 - responsive composition;
 - keyboard and assistive-technology behavior;
+- interface audio cues and the sound-off equivalent;
 - loading, empty, error, success, and long-content states;
 - motion purpose, timing character, interruption behavior, and reduced-motion equivalent;
 - performance expectations.
