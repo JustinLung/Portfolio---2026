@@ -104,7 +104,6 @@
 		width: 100%;
 		left: 50%;
 		transform: translateX(-50%);
-		mix-blend-mode: difference;
 		top: 0;
 		display: flex;
 		justify-content: space-between;
@@ -115,16 +114,31 @@
 			color: var(--color-white) !important;
 			text-decoration: none !important;
 			font-size: 0.875rem;
+			mix-blend-mode: difference;
 		}
 
 		.header__menu-button {
+			display: inline-flex;
+			width: 32px;
+			height: 32px;
+			margin-block: -17px;
 			padding: 0;
+			align-items: center;
+			justify-content: center;
 			color: var(--color-white);
 			background: none;
 			border: 0;
 			font: inherit;
 			font-size: 0.875rem;
 			cursor: pointer;
+
+			background-color: var(--color-secondary) !important;
+			border-radius: 4px;
+		}
+
+		.header__menu-button:focus-visible {
+			outline: 2px solid currentColor;
+			outline-offset: 2px;
 		}
 
 		.header__menu-icon {
