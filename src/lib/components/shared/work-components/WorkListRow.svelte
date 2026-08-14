@@ -108,7 +108,7 @@
 		gsap.to(previewRef, {
 			opacity: 0,
 			rotation: 0,
-			scale: 0.94,
+			scale: 0.75,
 			duration: prefersReducedMotion() ? 0 : 0.3,
 			ease: 'expo.out',
 			overwrite: 'auto'
@@ -172,7 +172,7 @@
 			grid-template-columns: 1fr auto;
 			gap: 6px 16px;
 			width: 100%;
-			padding: 18px 8px;
+			padding: 16px 8px;
 			color: var(--color-white);
 			font-size: 0.875rem;
 			text-decoration: none;
