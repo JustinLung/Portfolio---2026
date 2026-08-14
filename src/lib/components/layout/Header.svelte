@@ -121,7 +121,7 @@
 			display: inline-flex;
 			width: 32px;
 			height: 32px;
-			margin-block: -17px;
+			margin-block: -16px;
 			padding: 0;
 			align-items: center;
 			justify-content: center;
