@@ -118,7 +118,7 @@
 		margin-bottom: 128px;
 
 		.sticky-cards__title {
-			font-size: clamp(2rem, 5vw, 5rem);
+			font-size: clamp(2.5rem, 5vw, 5rem);
 			color: var(--color-white);
 		}
 
