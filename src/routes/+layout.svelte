@@ -7,6 +7,7 @@
 	import '../lib/css/button.css';
 	import '../utils/easter-egg';
 	import favicon from '$lib/assets/favicon.ico';
+	import CustomCursor from '$lib/components/shared/ui/CustomCursor.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Lenis from '$lib/components/shared/ui/Lenis.svelte';
@@ -45,6 +46,7 @@
 <SiteLoader />
 <Lenis />
 <PageTransition />
+<CustomCursor />
 <Header />
 <SkipMainContent />
 <main id="main" class="container" tabindex="-1">
