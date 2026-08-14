@@ -27,7 +27,7 @@
 				data-uisfx-hover="hover"
 				data-uisfx="back"
 			>
-				Back to all work
+				← Back to all work
 			</a>
 		</nav>
 
