@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { playSfxIfUnlocked } from '$lib/sfx';
+	import { appReady } from '$lib/stores/app-ready.svelte';
 	import gsap from 'gsap';
 	import { onMount, tick } from 'svelte';
 
@@ -72,11 +73,13 @@
 	onMount(() => {
 		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 			visible = false;
+			appReady.completeLoader();
 			return;
 		}
 
 		if (!loader || !indicator) {
 			visible = false;
+			appReady.completeLoader();
 			return;
 		}
 
@@ -98,6 +101,7 @@
 			if (!message) {
 				root.style.overflow = previousOverflow;
 				visible = false;
+				appReady.completeLoader();
 				return;
 			}
 
@@ -108,6 +112,7 @@
 					onComplete: () => {
 						root.style.overflow = previousOverflow;
 						visible = false;
+						appReady.completeLoader();
 					}
 				})
 				.to(indicatorElement, {

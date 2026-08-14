@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
+	import { appReady } from '$lib/stores/app-ready.svelte';
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 
@@ -42,20 +43,30 @@
 			return;
 		}
 
+		appReady.startTransition();
+
 		return new Promise<void>((resolve) => {
 			void moveCurtain(covering)
 				.then(async () => {
-					const transition = document.startViewTransition(async () => {
-						resolve();
-						await navigation.complete;
-					});
+					try {
+						const transition = document.startViewTransition(async () => {
+							resolve();
+							await navigation.complete;
+						});
 
-					await transition.finished;
-					await moveCurtain(hiddenRight);
-					gsap.set(curtain, { xPercent: hiddenLeft });
+						await transition.finished;
+						await moveCurtain(hiddenRight);
+						gsap.set(curtain, { xPercent: hiddenLeft });
+					} catch {
+						gsap.set(curtain, { xPercent: hiddenLeft });
+						resolve();
+					} finally {
+						appReady.completeTransition();
+					}
 				})
 				.catch(() => {
 					gsap.set(curtain, { xPercent: hiddenLeft });
+					appReady.completeTransition();
 					resolve();
 				});
 		});

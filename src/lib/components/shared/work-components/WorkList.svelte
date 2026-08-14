@@ -38,6 +38,7 @@
 		layoutAnimation?.kill();
 
 		if (currentItems?.length) {
+			gsap.killTweensOf(currentItems);
 			Flip.killFlipsOf(currentItems);
 			gsap.set(currentItems, {
 				clearProps:
