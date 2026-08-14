@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import Seo from '$lib/components/shared/misc/Seo.svelte';
+	import WorkPager from '$lib/components/shared/work-components/WorkPager.svelte';
 	import { onMount } from 'svelte';
 	import { observeHeaderHeight } from '../../../utils/header-height';
 	import type { PageProps } from './$types';
@@ -104,9 +105,11 @@
 	</section>
 </article>
 
+<WorkPager previous={data.previous} next={data.next} />
+
 <style>
 	.work-detail {
-		margin-block: 128px;
+		margin-block: 128px 0;
 		justify-content: space-between;
 		gap: 64px;
 

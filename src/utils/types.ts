@@ -23,6 +23,11 @@ export type WorkItem = {
 	previewHue?: number;
 };
 
+export type AdjacentWork = Pick<
+	WorkItem,
+	'slug' | 'title' | 'category' | 'year' | 'image' | 'imageAlt'
+>;
+
 export type ExperienceItem = {
 	id: number | string;
 	title: string;

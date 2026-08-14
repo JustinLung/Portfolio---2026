@@ -1,5 +1,5 @@
 import type { WorkFieldsFragment } from '$lib/graphql/generated/graphql';
-import type { WorkItem } from '../../utils/types';
+import type { AdjacentWork, WorkItem } from '../../utils/types';
 
 export function toWorkItem(work: WorkFieldsFragment): WorkItem {
 	if (!work.slug || !work.title || !work.date) {
@@ -35,4 +35,34 @@ export function toWorkItem(work: WorkFieldsFragment): WorkItem {
 
 export function sortWorksByYearDesc(works: WorkItem[]): WorkItem[] {
 	return [...works].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
+}
+
+export function toAdjacentWork(work: WorkItem): AdjacentWork {
+	return {
+		slug: work.slug,
+		title: work.title,
+		category: work.category,
+		year: work.year,
+		image: work.image,
+		imageAlt: work.imageAlt
+	};
+}
+
+export function getAdjacentWorks(
+	works: WorkItem[],
+	slug: string
+): { previous: AdjacentWork | null; next: AdjacentWork | null } {
+	const index = works.findIndex((work) => work.slug === slug);
+
+	if (index === -1) {
+		return { previous: null, next: null };
+	}
+
+	const previousWork = works[index - 1];
+	const nextWork = works[index + 1];
+
+	return {
+		previous: previousWork ? toAdjacentWork(previousWork) : null,
+		next: nextWork ? toAdjacentWork(nextWork) : null
+	};
 }
