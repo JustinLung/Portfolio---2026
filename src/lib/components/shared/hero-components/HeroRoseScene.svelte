@@ -3,29 +3,36 @@
 	import {
 		Color,
 		MeshPhysicalMaterial,
+		Plane,
 		Raycaster,
 		Sphere,
 		SphereGeometry,
 		Vector2,
 		Vector3,
+		type Group,
 		type Mesh,
 		type PerspectiveCamera
 	} from 'three';
 	import CustomShaderMaterial from 'three-custom-shader-material/vanilla';
-	import { wobbleFragmentShader, wobbleVertexShader } from './heroWobbleShaders';
+	import wobbleVertexShader from './heroWobble.vert?raw';
+	import wobbleFragmentShader from './heroWobble.frag?raw';
 
 	type Props = {
 		pointerX?: number;
 		pointerY?: number;
 		pointerActive?: boolean;
+		pointerDown?: boolean;
 		reducedMotion?: boolean;
+		reveal?: { scale: number };
 	};
 
 	let {
 		pointerX = 0,
 		pointerY = 0,
 		pointerActive = false,
-		reducedMotion = false
+		pointerDown = false,
+		reducedMotion = false,
+		reveal = { scale: 1 }
 	}: Props = $props();
 
 	const { size } = useThrelte();
@@ -38,7 +45,14 @@
 	const worldScale = new Vector3();
 	const worldHit = new Vector3();
 	const localHit = new Vector3();
+	const dragPlane = new Plane();
+	const dragPlaneNormal = new Vector3();
+	const worldDragTarget = new Vector3();
+	const localDragTarget = new Vector3();
+	const dragAnchor = new Vector3(0, 0, sphereRadius);
+	const dragOffsetTarget = new Vector3();
 	const pointerTarget = new Vector2();
+	const maxDragOffset = 0.82;
 
 	const uniforms = {
 		uTime: { value: 0 },
@@ -51,6 +65,10 @@
 		uPointer: { value: new Vector2() },
 		uHoverPoint: { value: new Vector3(0, 0, sphereRadius) },
 		uHoverStrength: { value: 0 },
+		uDragOrigin: { value: new Vector3(0, 0, sphereRadius) },
+		uDragOffset: { value: new Vector3() },
+		uDragStrength: { value: 0 },
+		uDragRadius: { value: 0.92 },
 		uColorA: { value: new Color('#57001f') },
 		uColorB: { value: new Color('#ff2c78') },
 		uHoverColor: { value: new Color('#ffc1d8') }
@@ -73,8 +91,11 @@
 	let sceneScale = $state(1.35);
 	let sceneY = $state(-1.45);
 	let camera = $state<PerspectiveCamera>();
+	let revealGroup = $state<Group>();
 	let mesh = $state<Mesh>();
 	let elapsed = 0;
+	let wasPointerDown = false;
+	let dragEngaged = false;
 
 	useTask((delta) => {
 		const easing = 1 - Math.exp(-delta * 3);
@@ -91,6 +112,7 @@
 		rotationY += (targetY - rotationY) * easing;
 		sceneScale += (targetSceneScale - sceneScale) * easing;
 		sceneY += (targetSceneY - sceneY) * easing;
+		revealGroup?.scale.setScalar(reveal.scale);
 		pointerTarget.set(pointerX, -pointerY);
 		uniforms.uPointer.value.lerp(pointerTarget, easing);
 		uniforms.uStrength.value += (targetStrength - uniforms.uStrength.value) * easing;
@@ -117,6 +139,59 @@
 		uniforms.uHoverStrength.value +=
 			(hoverTarget - uniforms.uHoverStrength.value) * (1 - Math.exp(-delta * 8));
 
+		if (reducedMotion) {
+			dragEngaged = false;
+			dragOffsetTarget.set(0, 0, 0);
+			uniforms.uDragOffset.value.set(0, 0, 0);
+			uniforms.uDragStrength.value = 0;
+		} else {
+			if (pointerDown && !wasPointerDown && camera && mesh) {
+				pointerNdc.set(pointerX, -pointerY);
+				raycaster.setFromCamera(pointerNdc, camera);
+				mesh.updateWorldMatrix(true, false);
+				mesh.getWorldPosition(worldCenter);
+				mesh.getWorldScale(worldScale);
+				hitSphere.set(
+					worldCenter,
+					sphereRadius * Math.max(worldScale.x, worldScale.y, worldScale.z) + 0.18
+				);
+
+				dragEngaged = Boolean(raycaster.ray.intersectSphere(hitSphere, worldHit));
+				if (dragEngaged) {
+					localHit.copy(worldHit);
+					mesh.worldToLocal(localHit);
+					dragAnchor.copy(localHit).normalize().multiplyScalar(sphereRadius);
+					uniforms.uDragOrigin.value.copy(dragAnchor);
+					worldHit.copy(dragAnchor);
+					mesh.localToWorld(worldHit);
+					camera.getWorldDirection(dragPlaneNormal);
+					dragPlane.setFromNormalAndCoplanarPoint(dragPlaneNormal, worldHit);
+					dragOffsetTarget.set(0, 0, 0);
+				}
+			} else if (!pointerDown) {
+				dragEngaged = false;
+			}
+
+			if (dragEngaged && pointerDown && camera && mesh) {
+				pointerNdc.set(pointerX, -pointerY);
+				raycaster.setFromCamera(pointerNdc, camera);
+				if (raycaster.ray.intersectPlane(dragPlane, worldDragTarget)) {
+					localDragTarget.copy(worldDragTarget);
+					mesh.worldToLocal(localDragTarget);
+					dragOffsetTarget.copy(localDragTarget).sub(dragAnchor).clampLength(0, maxDragOffset);
+				}
+			} else {
+				dragOffsetTarget.set(0, 0, 0);
+			}
+
+			const dragOffsetEasing = 1 - Math.exp(-delta * (dragEngaged ? 18 : 7));
+			const dragStrengthEasing = 1 - Math.exp(-delta * (dragEngaged ? 14 : 8));
+			uniforms.uDragOffset.value.lerp(dragOffsetTarget, dragOffsetEasing);
+			uniforms.uDragStrength.value +=
+				((dragEngaged ? 1 : 0) - uniforms.uDragStrength.value) * dragStrengthEasing;
+		}
+		wasPointerDown = pointerDown;
+
 		if (!reducedMotion) {
 			elapsed += delta;
 			uniforms.uTime.value += delta;
@@ -139,12 +214,14 @@
 <T.PointLight color="#ff0b64" intensity={42} distance={9} decay={2} position={[3, -1.4, 2.8]} />
 <T.PointLight color="#6438ff" intensity={28} distance={8} decay={2} position={[-2.4, 0, -2.6]} />
 
-<T.Group
-	position={[0.22, sceneY, 0]}
-	rotation.x={rotationX}
-	rotation.y={rotationY}
-	rotation.z={-0.08}
-	scale={sceneScale * breath}
->
-	<T.Mesh bind:ref={mesh} {geometry} {material} />
+<T.Group bind:ref={revealGroup} scale={reveal.scale}>
+	<T.Group
+		position={[0.22, sceneY, 0]}
+		rotation.x={rotationX}
+		rotation.y={rotationY}
+		rotation.z={-0.08}
+		scale={sceneScale * breath}
+	>
+		<T.Mesh bind:ref={mesh} {geometry} {material} />
+	</T.Group>
 </T.Group>
