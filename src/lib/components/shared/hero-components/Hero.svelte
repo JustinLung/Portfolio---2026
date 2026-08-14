@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Canvas } from '@threlte/core';
+	import { afterNavigate } from '$app/navigation';
 	import gsap from 'gsap';
 	import { appReady } from '$lib/stores/app-ready.svelte';
 	import HeroRoseScene from './HeroRoseScene.svelte';
@@ -13,9 +14,15 @@
 	let reducedMotion = $state(false);
 	let pixelRatio = $state(1);
 	const reveal = { scale: 0 };
-	let entrancePlayed = false;
+	let replayRequest = $state(0);
 	let activePointerId: number | null = null;
 	let heroElement: HTMLElement | null = null;
+
+	afterNavigate(({ from, to, type }) => {
+		if (type === 'link' && from?.url.pathname === '/' && to?.url.pathname === '/') {
+			replayRequest += 1;
+		}
+	});
 
 	const updatePointerPosition = (event: PointerEvent) => {
 		const bounds = heroElement?.getBoundingClientRect();
@@ -91,9 +98,9 @@
 		motionQuery.addEventListener('change', updateMotionPreference);
 
 		$effect(() => {
-			if (!appReady.ready || entrancePlayed) return;
+			const replay = replayRequest;
+			if (!appReady.ready) return;
 
-			entrancePlayed = true;
 			const context = gsap.context(() => {
 				if (motionQuery.matches) {
 					reveal.scale = 1;
@@ -108,7 +115,7 @@
 				gsap.set('.hero__title', { autoAlpha: 0, yPercent: 24 });
 
 				gsap
-					.timeline()
+					.timeline({ id: `hero-entrance-${replay}` })
 					.to(reveal, {
 						scale: 1,
 						duration: 1.35,
