@@ -1,0 +1,9 @@
+{
+    "redirects": [
+        {
+            "source": "/(.*)",
+            "destination": "https://justinlung.com/$1",
+            "permanent": true
+        }
+    ]
+}

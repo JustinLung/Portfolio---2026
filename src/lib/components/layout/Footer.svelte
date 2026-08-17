@@ -6,7 +6,7 @@
 	const year = new Date().getFullYear();
 
 	/** Toggle this to flip the availability badge between green and red. */
-	const availableForProjects = false;
+	const availableForProjects = true;
 </script>
 
 <footer class="footer">
@@ -18,7 +18,7 @@
 				class:footer__eyebrow--unavailable={!availableForProjects}
 			>
 				{availableForProjects
-					? 'Available for select projects'
+					? 'Open to select projects'
 					: 'Currently unavailable for projects'}
 			</span>
 			<p class="font-heading-4 font__heading font-heading">
