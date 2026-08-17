@@ -10,7 +10,10 @@
 	let { data }: PageProps = $props();
 </script>
 
-<Seo title={data.page.hero.subtitle} description={data.page.personal.text} />
+<Seo
+	title={data.page.hero.subtitle}
+	description="Justin Lung — creative frontend developer in Amsterdam building accessible, motion-led sites with GSAP, Framer Motion and Next.js."
+/>
 
 <Hero title={data.page.hero.title} subtitle={data.page.hero.subtitle} />
 <KineticManifesto />

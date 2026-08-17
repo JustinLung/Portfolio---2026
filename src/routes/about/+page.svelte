@@ -8,7 +8,10 @@
 	let { data }: PageProps = $props();
 </script>
 
-<Seo title={data.page.title} description={data.page.content} />
+<Seo
+	title={data.page.title}
+	description="Justin Lung — creative frontend developer in Amsterdam building accessible, motion-led sites with GSAP, Framer Motion and Next.js. Also a Shopify, WordPress and HubSpot developer."
+/>
 
 <About
 	title={data.page.title}
