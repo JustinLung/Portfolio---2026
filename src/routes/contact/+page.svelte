@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Seo from '$lib/components/shared/misc/Seo.svelte';
 	import { socialLinks } from '../../utils/links';
-	import { playSfx } from '$lib/sfx';
+	import { playSfx } from '$lib/sfx.svelte';
 
 	const email = 'justinlung77@gmail.com';
 

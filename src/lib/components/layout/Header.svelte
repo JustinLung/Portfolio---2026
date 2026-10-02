@@ -2,42 +2,172 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import gsap from 'gsap';
-	import { links } from '../../../utils/links';
-	import { onDestroy } from 'svelte';
-	import { playSfx } from '$lib/sfx';
+	import { links, socialLinks } from '../../../utils/links';
+	import { MediaQuery } from 'svelte/reactivity';
+	import { playSfx } from '$lib/sfx.svelte';
+	import SoundToggle from '../shared/ui/SoundToggle.svelte';
+
+	const DRAG_THRESHOLD = 6;
+	const CLOSE_DISTANCE = 0.25;
+	const CLOSE_VELOCITY = 0.5;
 
 	let menuOpen = $state(false);
 	let navigation: HTMLElement;
-	let headerHeight = $state(0);
+	let backdrop: HTMLElement;
+	let menuButton: HTMLButtonElement;
+	let initialized = false;
+
+	let drag: {
+		pointerId: number;
+		startY: number;
+		lastY: number;
+		lastTime: number;
+		velocity: number;
+		height: number;
+		active: boolean;
+	} | null = null;
+	let suppressClick = false;
+	let setSheetY: (value: number) => void;
+	let setBackdropOpacity: (value: number) => void;
+
+	// Mirrors --viewport-md-up in src/lib/css/media.css.
+	const desktop = new MediaQuery('min-width: 48em');
+	const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	function toggleMenu() {
 		menuOpen = !menuOpen;
 		playSfx(menuOpen ? 'open' : 'close');
 	}
 
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.key !== 'Escape' || !menuOpen) return;
+	function closeMenu() {
+		if (!menuOpen) return;
 		menuOpen = false;
 		playSfx('close');
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key !== 'Escape') return;
+		closeMenu();
+	}
+
+	function handlePointerDown(event: PointerEvent) {
+		if (!menuOpen || event.button !== 0) return;
+		drag = {
+			pointerId: event.pointerId,
+			startY: event.clientY,
+			lastY: event.clientY,
+			lastTime: event.timeStamp,
+			velocity: 0,
+			height: 0,
+			active: false
+		};
+	}
+
+	function handlePointerMove(event: PointerEvent) {
+		if (!drag || event.pointerId !== drag.pointerId) return;
+
+		const offset = event.clientY - drag.startY;
+
+		if (!drag.active) {
+			if (Math.abs(offset) < DRAG_THRESHOLD) return;
+			drag.active = true;
+			drag.height = navigation.offsetHeight;
+			navigation.setPointerCapture(event.pointerId);
+			gsap.killTweensOf([navigation, backdrop]);
+		}
+
+		const elapsed = event.timeStamp - drag.lastTime;
+		if (elapsed > 0) drag.velocity = (event.clientY - drag.lastY) / elapsed;
+		drag.lastY = event.clientY;
+		drag.lastTime = event.timeStamp;
+
+		// Follow the finger downwards; resist dragging upwards like a native sheet.
+		const y = offset > 0 ? offset : offset * 0.2;
+		const progress = Math.max(0, y) / drag.height;
+
+		setSheetY(y);
+		setBackdropOpacity(1 - progress);
+	}
+
+	function handlePointerUp(event: PointerEvent) {
+		if (!drag || event.pointerId !== drag.pointerId) return;
+
+		const { active, startY, velocity, height } = drag;
+		drag = null;
+
+		if (!active) return;
+
+		// A drag ends with a click on whatever is under the finger; swallow it.
+		suppressClick = true;
+		setTimeout(() => (suppressClick = false));
+
+		const offset = event.clientY - startY;
+		const shouldClose = offset > height * CLOSE_DISTANCE || velocity > CLOSE_VELOCITY;
+
+		if (shouldClose && event.type === 'pointerup') {
+			closeMenu();
+			return;
+		}
+
+		const duration = reducedMotion() ? 0 : 0.35;
+		gsap.to(navigation, { y: 0, duration, ease: 'power3.out' });
+		gsap.to(backdrop, { opacity: 1, duration });
+	}
+
+	function handleClickCapture(event: MouseEvent) {
+		if (!suppressClick) return;
+		event.preventDefault();
+		event.stopPropagation();
 	}
 
 	$effect(() => {
 		const open = menuOpen;
 
-		if (!navigation) return;
+		if (!navigation || !backdrop) return;
 
-		gsap.killTweensOf(navigation);
+		if (!initialized) {
+			initialized = true;
+			gsap.set(navigation, { yPercent: 100 });
+			setSheetY = gsap.quickSetter(navigation, 'y', 'px') as (value: number) => void;
+			setBackdropOpacity = gsap.quickSetter(backdrop, 'opacity') as (value: number) => void;
+			return;
+		}
+
+		const duration = reducedMotion() ? 0 : open ? 0.5 : 0.35;
+
+		gsap.killTweensOf([navigation, backdrop]);
+
+		if (open) gsap.set(navigation, { visibility: 'visible' });
+
 		gsap.to(navigation, {
-			autoAlpha: open ? 1 : 0,
-			y: open ? 0 : -8,
-			pointerEvents: open ? 'auto' : 'none',
-			duration: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.25,
-			ease: 'power2.out'
+			yPercent: open ? 0 : 100,
+			y: 0,
+			duration,
+			ease: open ? 'expo.out' : 'power3.in',
+			onComplete: () => {
+				if (!open) gsap.set(navigation, { visibility: 'hidden' });
+			}
 		});
+		gsap.to(backdrop, { autoAlpha: open ? 1 : 0, duration });
+
+		document.documentElement.style.overflow = open ? 'hidden' : '';
+		if (open) {
+			window.Lenis?.stop();
+			navigation.querySelector<HTMLElement>('a')?.focus({ preventScroll: true });
+		} else {
+			window.Lenis?.start();
+			if (navigation.contains(document.activeElement)) menuButton?.focus();
+		}
 	});
 
-	onDestroy(() => {
-		gsap.killTweensOf(navigation);
+	// The sheet is hidden from the md breakpoint up; don't leave the page scroll-locked.
+	$effect(() => {
+		if (desktop.current) menuOpen = false;
+	});
+
+	$effect(() => () => {
+		gsap.killTweensOf([navigation, backdrop]);
+		document.documentElement.style.overflow = '';
 	});
 </script>
 
@@ -62,12 +192,13 @@
 	</ul>
 {/snippet}
 
-<header class="header container" bind:clientHeight={headerHeight}>
+<header class="header container">
 	<a href={resolve('/')} class="header__logo" data-uisfx-hover="hover" data-uisfx="back">
 		Portfolio
 	</a>
 
 	<button
+		bind:this={menuButton}
 		class="header__menu-button"
 		class:header__menu-button--open={menuOpen}
 		aria-expanded={menuOpen}
@@ -88,13 +219,44 @@
 	</nav>
 </header>
 
+<div bind:this={backdrop} class="header__backdrop" aria-hidden="true" onclick={closeMenu}></div>
+
 <nav
 	id="main-navigation"
 	bind:this={navigation}
 	class="header__menu"
-	style="--header-height: {headerHeight}px"
+	aria-label="Mobile navigation"
+	inert={!menuOpen}
+	onpointerdown={handlePointerDown}
+	onpointermove={handlePointerMove}
+	onpointerup={handlePointerUp}
+	onpointercancel={handlePointerUp}
+	onclickcapture={handleClickCapture}
 >
+	<span class="header__menu-handle" aria-hidden="true"></span>
 	{@render navigationLinks()}
+	<div class="header__menu-footer">
+		<!-- eslint-disable svelte/no-navigation-without-resolve -- external URLs -->
+		<ul class="header__socials" role="list" aria-label="Social links">
+			{#each socialLinks as link (link.href)}
+				<li>
+					<a
+						href={link.href}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="link"
+						data-uisfx-hover="hover"
+						data-uisfx="forward">{link.label}</a
+					>
+				</li>
+			{/each}
+		</ul>
+		<!-- eslint-enable svelte/no-navigation-without-resolve -->
+
+		<div class="header__sound">
+			<SoundToggle />
+		</div>
+	</div>
 </nav>
 
 <style>
@@ -219,24 +381,88 @@
 		}
 	}
 
-	.header__menu {
+	/* Sits below the header so the menu button stays usable as a close control. */
+	.header__backdrop {
 		position: fixed;
-		z-index: 10;
-		top: calc(var(--header-height) - 8px);
-		right: 16px;
-		width: min(240px, calc(100% - 32px));
-		padding: 16px;
-		background-color: var(--color-secondary);
-		border-radius: 4px;
-		box-shadow: 0 12px 32px rgb(0 0 0 / 20%);
+		z-index: 9;
+		inset: 0;
+		background-color: rgb(0 0 0 / 50%);
 		visibility: hidden;
 		opacity: 0;
-		transform: translateY(-8px);
-		pointer-events: none;
 
 		@media (--viewport-md-up) {
 			display: none;
 		}
+	}
+
+	.header__menu {
+		position: fixed;
+		z-index: 11;
+		inset-inline: 0;
+		bottom: 0;
+		padding: 12px 16px calc(32px + env(safe-area-inset-bottom));
+		background-color: var(--color-secondary);
+		border-radius: 16px 16px 0 0;
+		box-shadow: 0 -12px 32px rgb(0 0 0 / 20%);
+		visibility: hidden;
+		touch-action: none;
+		user-select: none;
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset-inline: 0;
+			top: 100%;
+			height: 100px;
+			background-color: inherit;
+		}
+
+		@media (--viewport-md-up) {
+			display: none;
+		}
+
+		.header__links {
+			gap: 24px;
+			padding-bottom: 24px;
+			border-bottom: 1px solid color-mix(in srgb, var(--color-quaternary) 40%, transparent);
+		}
+	}
+
+	.header__socials {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 24px;
+		list-style: none;
+		margin: 24px 0 0;
+		padding: 0;
+
+		.link {
+			color: var(--color-quaternary);
+			font-size: 0.875rem;
+		}
+	}
+
+	.header__menu-footer {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 16px;
+	}
+
+	.header__sound {
+		color: var(--color-quaternary);
+		font-size: 0.875rem;
+		display: flex;
+		align-items: center;
+	}
+
+	.header__menu-handle {
+		display: block;
+		width: 40px;
+		height: 4px;
+		margin: 0 auto 24px;
+		background-color: var(--color-quaternary);
+		border-radius: 2px;
 	}
 
 	.header__links {

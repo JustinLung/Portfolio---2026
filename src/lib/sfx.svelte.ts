@@ -35,6 +35,7 @@ export function initializeSfx(root: Document): () => Promise<void> {
 			context: getAudioContext(),
 			preferences: { key: 'portfolio:sound' }
 		});
+		sfxState.enabled = player.isEnabled();
 	}
 
 	unbind?.();
@@ -81,13 +82,13 @@ export async function playSfxIfUnlocked(cue: CueName, options?: PlayOptions): Pr
 	playSfx(cue, options);
 }
 
-export function isSfxEnabled(): boolean {
-	return player?.isEnabled() ?? true;
-}
+/** Reactive mirror of the player's preference, shared by every sound toggle. */
+export const sfxState = $state({ enabled: true });
 
 export function setSfxEnabled(enabled: boolean): void {
 	if (!player) return;
 
 	if (!enabled) player.stopAll();
 	player.setEnabled(enabled);
+	sfxState.enabled = enabled;
 }

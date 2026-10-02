@@ -3,7 +3,7 @@
 	import BlogCard from './BlogCard.svelte';
 	import type { EmblaCarouselType } from 'embla-carousel';
 	import emblaCarouselSvelte from 'embla-carousel-svelte';
-	import { playSfx } from '$lib/sfx';
+	import { playSfx } from '$lib/sfx.svelte';
 
 	let { posts, title }: { posts: PostItem[]; title: string } = $props();
 	let emblaApi = $state<EmblaCarouselType>();

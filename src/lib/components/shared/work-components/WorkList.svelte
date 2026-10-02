@@ -5,7 +5,7 @@
 	import WorkListCard from './WorkListCard.svelte';
 	import WorkListRow from './WorkListRow.svelte';
 	import type { WorkItem } from '../../../../utils/types';
-	import { playSfx } from '$lib/sfx';
+	import { playSfx } from '$lib/sfx.svelte';
 
 	gsap.registerPlugin(Flip);
 

@@ -4,7 +4,7 @@
 	import { Flip } from 'gsap/Flip';
 	import BlogCard from '$lib/components/shared/post-components/BlogCard.svelte';
 	import Seo from '$lib/components/shared/misc/Seo.svelte';
-	import { playSfx } from '$lib/sfx';
+	import { playSfx } from '$lib/sfx.svelte';
 	import { appReady } from '$lib/stores/app-ready.svelte';
 	import type { PageProps } from './$types';
 

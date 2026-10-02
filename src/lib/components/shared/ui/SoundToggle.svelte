@@ -1,26 +1,16 @@
 <script lang="ts">
-	import { isSfxEnabled, playSfx, setSfxEnabled } from '$lib/sfx';
-	import { onMount, tick } from 'svelte';
+	import { playSfx, setSfxEnabled, sfxState } from '$lib/sfx.svelte';
 
-	let enabled = $state(true);
-
-	onMount(async () => {
-		await tick();
-		enabled = isSfxEnabled();
-	});
+	const enabled = $derived(sfxState.enabled);
 
 	function toggleSound() {
-		const nextEnabled = !enabled;
-
-		if (nextEnabled) {
+		if (!enabled) {
 			setSfxEnabled(true);
-			enabled = true;
 			playSfx('toggle-on');
 			return;
 		}
 
 		playSfx('toggle-off');
-		enabled = false;
 		setSfxEnabled(false);
 	}
 </script>

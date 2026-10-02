@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { playSfxIfUnlocked } from '$lib/sfx';
+	import { playSfxIfUnlocked } from '$lib/sfx.svelte';
 	import { appReady } from '$lib/stores/app-ready.svelte';
 	import gsap from 'gsap';
 	import { onMount, tick } from 'svelte';
