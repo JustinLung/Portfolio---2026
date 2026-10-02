@@ -433,7 +433,6 @@
 		flex-wrap: wrap;
 		gap: 8px 24px;
 		list-style: none;
-		margin: 24px 0 0;
 		padding: 0;
 
 		.link {
@@ -446,6 +445,7 @@
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
+		padding-top: 24px;
 		gap: 16px;
 	}
 
